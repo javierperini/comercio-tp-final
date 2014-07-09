@@ -15,19 +15,20 @@ import Movimiento.Movimiento;
 
 
 public abstract class Venta extends Movimiento{
-
-	protected int codigoDeVenta;
 	
 	
-	
+	/**
+	 *CONSTRUCTOR
+	 */
 	public Venta(Cliente unCliente, List<OrdenDeCompra> listadoDeProductos,DateTime fecha,Comercio comercio) {
 		super(unCliente, listadoDeProductos,fecha,comercio);
-		
-	   codigoDeVenta=(int)Math.random();
 	}
 
 	
 	//TESTEAR
+	/**
+	 *Decrementa el stock de los productos que estan en la lista dada por el cliente.
+	 */
 	public void modificarStock(){
 		try{
 			for (OrdenDeCompra orden : this.listadoDeProductos) {
@@ -38,10 +39,19 @@ public abstract class Venta extends Movimiento{
 		}
 	}
 	
-	
+	/**
+	 *Registra la venta en la lista de compras hechas del cliente.
+	 */
 	public void agregarVentaAlCliente() throws SinCuentaCorrienteException{
 		this.getCliente().addCompra(this);
 	}
+	
+	/**
+	 *Determina si la venta pertenece a tal cliente y si se hizo en una fecha determinada.
+     * @param cliente
+	 * @param ordenCompras
+	 * @param fecha
+	 */
 	public boolean perteneceA(Cliente cliente,List<OrdenDeCompra> ordenCompras, DateTime fecha) {
 		
 		return this.getFecha().isEqual(fecha) && this.getCliente().equals(cliente) ;

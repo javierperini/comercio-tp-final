@@ -58,6 +58,8 @@ public class VentaDirectaTest {
 		when(this.ordenMock.getCantidad()).thenReturn(1d);
 		when(this.ordenMock2.getCantidad()).thenReturn(3d);
 		
+		when(this.ordenMock2.getUnaUnidad()).thenReturn(new Unidad());
+		
 		
 		///Lista de compras
 		this.listaDeCompras = new ArrayList<OrdenDeCompra>();
@@ -65,7 +67,7 @@ public class VentaDirectaTest {
 		this.listaDeCompras.add(ordenMock2);
 		
 		////Venta Directa
-		ventaD = new VentaDirecta(clienteMock, listaDeCompras, hoy,comercioMock);
+		ventaD = new VentaDirecta(clienteMock, listaDeCompras, hoy, comercioMock);
 	}
 	
 	@Test
@@ -73,5 +75,16 @@ public class VentaDirectaTest {
 		this.ventaD.modificarStock();
 		verify(this.lecheMock,times(1)).decrementarStock(1, litrosMock);
 		verify(this.carneMock,times(1)).decrementarStock(3, kilosMock);		
+	}
+	
+	@Test(expected=NoTengoStock.class)
+	public void siAlModificarElStockElProductoNoCuentaConLaCantidadSeLanzaLaExcepcion() throws NoTengoStock {
+		when(this.carneMock.decrementarStock(this.ordenMock2.getCantidad(), this.ordenMock2.getUnidad())).thenThrows(new NoTengoStock());
+		this.ventaD.modificarStock();		
+	}
+	
+	@Test
+	public void calcularImporteTest(){
+		assertEquals(54d,this.ventaD.calcularImporte(),0);
 	}
 }

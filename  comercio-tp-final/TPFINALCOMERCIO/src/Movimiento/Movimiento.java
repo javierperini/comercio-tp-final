@@ -16,7 +16,9 @@ public abstract class Movimiento {
 		protected Comercio comercio;
 		protected double montoTotal;
 		
-		
+		/**
+		 *-CONSTRUCTOR
+		 */
 	 public Movimiento(Cliente unCliente, List<OrdenDeCompra> listadoDeProductos,DateTime fecha,Comercio comercio) {
 			this.cliente=unCliente;
 			this.listadoDeProductos = listadoDeProductos;
@@ -25,6 +27,9 @@ public abstract class Movimiento {
 			this.montoTotal= 0d;
 		}
         //TESTEAR
+	 	/**
+		 *-Calcula el importe de la lista de ordenes de compra, osea la suma de: cada producto por su cantidad.
+		 */
 	 	public double calcularImporte(){
 			double monto= 0d;
 			for (OrdenDeCompra orden : this.listadoDeProductos) {
@@ -37,14 +42,26 @@ public abstract class Movimiento {
 			this.montoTotal=monto;
 			return monto;
 		}
+	 	/**
+		 *-Cliente al que corresponde la venta.
+		 */
 		public Cliente getCliente(){
 			return this.cliente;
 		}
+		/**
+		 *-Metodo abstracto que deberan implementar: Venta, Devolucion y Cambio.
+		 */
 		public abstract void modificarStock();
 		
+		/**
+		 *-La lista de ordenes de compra del cliente.
+		 */
 		public List<OrdenDeCompra> getOrdenes() {
 			return this.listadoDeProductos;
 		}
+		/**
+		 *-Fecha en que se realiza la venta.
+		 */
 		public DateTime getFecha(){
 			return fecha;
 		}

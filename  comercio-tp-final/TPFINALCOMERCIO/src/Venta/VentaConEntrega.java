@@ -1,4 +1,4 @@
-package Movimiento;
+package Venta;
 import java.util.List;
 
 import org.joda.time.DateTime;

@@ -1,4 +1,4 @@
-package Movimiento;
+package Venta;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -9,6 +9,7 @@ import Comercio.OrdenDeCompra;
 import Excepciones.NoTengoStock;
 import Excepciones.SaldoInsuficienteException;
 import Excepciones.SinCuentaCorrienteException;
+import Movimiento.Movimiento;
 
 
 

@@ -11,15 +11,15 @@ import org.joda.time.DateTime;
 import Cliente.Cliente;
 import Movimiento.Cambio;
 import Movimiento.Devolucion;
-import Movimiento.Venta;
-import Movimiento.VentaConCuentaCorriente;
-import Movimiento.VentaConEntrega;
-import Movimiento.VentaDirecta;
 import Oferta.Oferta;
 import Oferta.OfertaCompuesta;
 import Oferta.OfertaSimple;
 import Producto.Producto;
 import Producto.Unidad;
+import Venta.Venta;
+import Venta.VentaConCuentaCorriente;
+import Venta.VentaConEntrega;
+import Venta.VentaDirecta;
 
 
 public class Comercio extends Observable {

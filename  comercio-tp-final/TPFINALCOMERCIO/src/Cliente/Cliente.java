@@ -11,9 +11,9 @@ import Comercio.Comercio;
 import Comercio.OrdenDeCompra;
 import Excepciones.SaldoInsuficienteException;
 import Excepciones.SinCuentaCorrienteException;
-import Movimiento.Venta;
 import Producto.Producto;
 import Producto.Unidad;
+import Venta.Venta;
 
 
 

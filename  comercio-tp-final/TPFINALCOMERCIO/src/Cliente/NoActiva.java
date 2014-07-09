@@ -1,7 +1,7 @@
 package Cliente;
 
 import Excepciones.SinCuentaCorrienteException;
-import Movimiento.VentaConCuentaCorriente;
+import Venta.VentaConCuentaCorriente;
 
 
 public class NoActiva extends EstadoCuentaCorriente {

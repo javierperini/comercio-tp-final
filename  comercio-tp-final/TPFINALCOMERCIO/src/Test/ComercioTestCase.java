@@ -15,13 +15,13 @@ import org.mockito.internal.matchers.Any;
 import Cliente.Cliente;
 import Comercio.Comercio;
 import Comercio.OrdenDeCompra;
-import Movimiento.Venta;
-import Movimiento.VentaConCuentaCorriente;
 import Oferta.Oferta;
 import Producto.Presentacion;
 import Producto.Producto;
 import Producto.Ubicacion;
 import Producto.Unidad;
+import Venta.Venta;
+import Venta.VentaConCuentaCorriente;
 public class ComercioTestCase {
 	Comercio comercio;
 	Comercio sucursal;

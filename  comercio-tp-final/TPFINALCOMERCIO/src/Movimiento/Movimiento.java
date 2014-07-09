@@ -14,6 +14,7 @@ public abstract class Movimiento {
 		protected List<OrdenDeCompra> listadoDeProductos;
 		protected Cliente cliente;
 		protected Comercio comercio;
+		protected double montoTotal;
 		
 		
 	 public Movimiento(Cliente unCliente, List<OrdenDeCompra> listadoDeProductos,DateTime fecha,Comercio comercio) {
@@ -21,10 +22,11 @@ public abstract class Movimiento {
 			this.listadoDeProductos = listadoDeProductos;
 			this.fecha=fecha;
 			this.comercio=comercio;
+			this.montoTotal= 0d;
 		}
         //TESTEAR
-		public double calcularImporte(){
-			double monto = 0d;
+	 	public double calcularImporte(){
+			double monto= 0d;
 			for (OrdenDeCompra orden : this.listadoDeProductos) {
 				if(this.comercio.estaEnOferta(orden.getUnProducto(),this.fecha)){
 					monto+=comercio.getPrecioOfertaDe(orden.getUnProducto());
@@ -32,6 +34,7 @@ public abstract class Movimiento {
 					monto+=orden.getPrecio();
 				}
 			}
+			this.montoTotal=monto;
 			return monto;
 		}
 		public Cliente getCliente(){

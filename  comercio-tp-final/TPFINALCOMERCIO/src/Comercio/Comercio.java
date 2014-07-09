@@ -9,6 +9,7 @@ import java.util.Observable;
 import org.joda.time.DateTime;
 
 import Cliente.Cliente;
+import Excepciones.SinCuentaCorrienteException;
 import Movimiento.Cambio;
 import Movimiento.Devolucion;
 import Oferta.Oferta;
@@ -46,6 +47,7 @@ public class Comercio extends Observable {
 		this.ofertas=new ArrayList<Oferta>();
 		this.clientePedidos= new ArrayList<Cliente>();
 	}
+	
 	/**
 	 * Agrega un producto a la lista de productos
 	 * Notifica a sus clientes
@@ -58,20 +60,21 @@ public class Comercio extends Observable {
 		this.productos.add(producto);
 		this.notificarClientes(producto, unidad,cantidad,fecha);
 	}
-    /**
+    
+	/**
      * Cambia y notifica a sus observadores
      * @param producto
      * @param unidad
      * @param cantidad
      */
-   
-	public void notificarClientes(Producto producto, Unidad unidad,double cantidad,DateTime fecha) {
+   public void notificarClientes(Producto producto, Unidad unidad,double cantidad,DateTime fecha) {
 		
 		OrdenDeCompra pedida=  new OrdenDeCompra(producto,unidad,cantidad,fecha);
 		for(Cliente cliente: this.clientePedidos){
 			 cliente.avisoDePedido(pedida);
 		 }
 	}
+	
 	/**
 	 * 
 	 * @return Cantidad de productos en el sistema
@@ -79,6 +82,7 @@ public class Comercio extends Observable {
 	public int cantidadDeProductos() {
 		return productos.size();
 	}
+	
 	/**
 	 * Agrega un comercio a una red de comercios
 	 * @param comercio
@@ -86,6 +90,7 @@ public class Comercio extends Observable {
 	public void agregarComercio(Comercio comercio) {
 		this.comercios.add(comercio);
 	}
+	
 	/**
 	 * 
 	 * @return Cantidad de comercios en la red de comercios
@@ -93,9 +98,11 @@ public class Comercio extends Observable {
 	public int cantComerciosAhderidos() {
 		return comercios.size();
 	}
+	
 	public List<Devolucion> devolucionesRealizadas(){
 		return this.devoluciones;
 	}
+	
 	/**
 	 *1- Crea una VentaDirecta
 	 *2- Incrementa el monto del local, dependiendo de lo que alla gastado
@@ -104,17 +111,21 @@ public class Comercio extends Observable {
 	 * @param cliente
 	 * @param ordenCompras
 	 * @param fecha
+	 * @throws SinCuentaCorrienteException 
 	 */
-	public void generarVentaDirecta(Cliente cliente,List<OrdenDeCompra> ordenCompras, DateTime fecha) {
+	public void generarVentaDirecta(Cliente cliente,List<OrdenDeCompra> ordenCompras, DateTime fecha) throws SinCuentaCorrienteException {
 		VentaDirecta ventaD=new VentaDirecta(cliente,ordenCompras,fecha,this);
 		registrarVenta(ventaD);
 	}
-	private void registrarVenta(Venta ventaD) {
+	
+	private void registrarVenta(Venta ventaD) throws SinCuentaCorrienteException {
 		this.ventas.add(ventaD);
 		ventaD.modificarStock();
 		double gastado=ventaD.calcularImporte();
+		ventaD.agregarVentaAlCliente();
 		this.incrementarMonto(gastado);
 	}
+	
 	/**
 	 *1- Crea una VentaConEntrega 
 	 *2- Se Agrega a la lista de ventas realizadas
@@ -130,6 +141,7 @@ public class Comercio extends Observable {
 		ventaE.getEnvio().enviar();
 		ventaE.getEnvio().cobrarContrareembolso();
 	}
+	
 	/**
 	 *1- Crea una VentaConCuentaCorriente  
 	 *2- Incrementa el monto del local, dependiendo de lo que alla gastado
@@ -137,14 +149,14 @@ public class Comercio extends Observable {
 	 * @param cliente
 	 * @param ordenCompras
 	 * @param fecha
+	 * @throws SinCuentaCorrienteException 
 	 */
-	public void generarVentaCC(Cliente cliente, List<OrdenDeCompra> ordenCompras,DateTime fecha) {
+	public void generarVentaCC(Cliente cliente, List<OrdenDeCompra> ordenCompras,DateTime fecha) throws SinCuentaCorrienteException {
 			
 			VentaConCuentaCorriente ventaCC=new VentaConCuentaCorriente(cliente,ordenCompras,fecha,this);
 			this.registrarVenta(ventaCC);
-			
-			
 	}
+	
 	/**
 	 * 1- Crear un objeto OfertaSimple y lo agrega a las lista de ofertas
 	 * 2- Notifica a los clientes subcriptos que hay ofertas	
@@ -280,19 +292,22 @@ public class Comercio extends Observable {
 	 * @param ordenComprasNueva
 	 * @param fecha
 	 */
+	
 	public void generarCambio(Cliente cliente, List<OrdenDeCompra> ordenCompras, List<OrdenDeCompra> ordenComprasNueva, DateTime fecha) {
 		
 		Cambio cambio= new Cambio(cliente,ordenCompras,ordenComprasNueva,fecha,this);
 		cambio.modificarStock();
 		this.cambios.add(cambio);
-	} //TESTEAR
+	} 
+	
 	public boolean estaEnOferta(Producto producto, DateTime fecha) {
 		    for(Oferta oAct:this.ofertas){
 		    	if(oAct.ofertaValida(producto,fecha))
 		    	return true;
 		    }
 		return false;
-	}//TESTEAR
+	}
+	
 	public double getPrecioOfertaDe(Producto producto) {
 		double var= 0d;
 		for (Oferta of:this.ofertas){
@@ -300,7 +315,8 @@ public class Comercio extends Observable {
 				   var= of.getPrecioOferta();
 		 }
 		return var;
-	} //TESTEAR
+	} 
+	
 	public void agregarAListaPedidos(Cliente cliente) {
 		this.clientePedidos.add(cliente);
 		

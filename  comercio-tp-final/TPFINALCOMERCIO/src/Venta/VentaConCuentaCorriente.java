@@ -22,7 +22,7 @@ public class VentaConCuentaCorriente extends Venta{
 	public void cobrar(Cliente unCliente) throws SinCuentaCorrienteException, SaldoInsuficienteException {
 	      unCliente.descontarSaldo(this.calcularImporte());
 	}
-	
+	@Override
 	public void agregarVentaAlCliente() throws SinCuentaCorrienteException{
 			this.getCliente().addCompra(this);
 			this.getCliente().getCuentaCorriente().addCompra(this);

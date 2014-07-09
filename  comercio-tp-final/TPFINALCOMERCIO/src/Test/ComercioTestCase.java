@@ -13,8 +13,10 @@ import org.mockito.Mockito;
 import org.mockito.internal.matchers.Any;
 
 import Cliente.Cliente;
+import Cliente.CuentaCorriente;
 import Comercio.Comercio;
 import Comercio.OrdenDeCompra;
+import Excepciones.SinCuentaCorrienteException;
 import Oferta.Oferta;
 import Producto.Presentacion;
 import Producto.Producto;
@@ -40,6 +42,7 @@ public class ComercioTestCase {
 	DateTime fechaInicio;
 	DateTime fechaFin;
 	DateTime fechaIntermedia;
+	CuentaCorriente ccMock;
 
 	@Before
 	public void setUp(){
@@ -63,8 +66,9 @@ public class ComercioTestCase {
 		this.orden= new Mockito().mock(OrdenDeCompra.class);
 		this.oferta=new Mockito().mock(Oferta.class);
 		this.venta= new Mockito().mock(VentaConCuentaCorriente.class);
+		this.ccMock=new Mockito().mock(CuentaCorriente.class);
 		
-		//this.venta= Mockito.mock(VentaConCuentaCorriente.class);
+		
 		
 		
 		//Comportamiento a los mocks
@@ -74,6 +78,7 @@ public class ComercioTestCase {
 		Mockito.when(this.orden.getPrecio()).thenReturn(12d);
 		Mockito.when(this.orden.getCantidad()).thenReturn(1d);
 		Mockito.when(this.venta.calcularImporte()).thenReturn(12d);
+		Mockito.when(this.clienteMock.getCuentaCorriente()).thenReturn(this.ccMock);
 		//Agrego a las listas
 				this.productos.add(producto);
 				this.ordenCompras.add(this.orden);
@@ -98,14 +103,14 @@ public class ComercioTestCase {
 		assertEquals(2,this.comercio.ofertasRealizadas().size(),0);
 	}
 	@Test
-	public void testGenerarVentaCC(){
+	public void testGenerarVentaCC() throws SinCuentaCorrienteException{
 		this.comercio.generarVentaCC(this.clienteMock,this.ordenCompras,this.fechaInicio);
 		assertEquals(12d,this.comercio.getMontoRecaudado(),0);
 		assertEquals(1d,this.comercio.getVentas().size(),0);
 		
 	}
 	@Test
-	public void testGenerarVentaDirecta(){
+	public void testGenerarVentaDirecta() throws SinCuentaCorrienteException{
 		this.comercio.generarVentaDirecta(this.clienteMock,this.ordenCompras,this.fechaInicio);
 		assertEquals(12d,this.comercio.getMontoRecaudado(),0);
 		assertEquals(1d,this.comercio.getVentas().size(),0);
@@ -119,8 +124,8 @@ public class ComercioTestCase {
 		
 	}
 	@Test
-	public void generarDevolucion(){
-		this.comercio.generarVentaCC(this.clienteMock,this.ordenCompras,this.fechaInicio);
+	public void generarDevolucion() throws SinCuentaCorrienteException{
+		this.comercio.generarVentaDirecta(this.clienteMock,this.ordenCompras,this.fechaInicio);
 		this.comercio.generarUnaDevolcion(this.clienteMock,this.ordenCompras,this.fechaInicio);
 		assertEquals(0d,this.comercio.getMontoRecaudado(),0);
 		assertEquals(1,this.comercio.devolucionesRealizadas().size(),0);

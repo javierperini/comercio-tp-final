@@ -21,7 +21,6 @@ public class VentaConEntrega extends Venta{
 	public VentaConEntrega(Cliente unCliente, List<OrdenDeCompra> listadoDeProductos, DateTime unaFecha, Comercio unComercio) {
 		super(unCliente, listadoDeProductos,unaFecha,unComercio);
 		
-		
 	}
 
 	public void enviar(DateTime unaFechaDeSalida) {

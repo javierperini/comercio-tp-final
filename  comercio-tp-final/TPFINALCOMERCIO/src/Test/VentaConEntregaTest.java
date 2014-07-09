@@ -14,9 +14,9 @@ import Cliente.Cliente;
 import Comercio.Comercio;
 import Comercio.OrdenDeCompra;
 import Excepciones.NoTengoStock;
-import Movimiento.VentaConEntrega;
 import Producto.Producto;
 import Producto.Unidad;
+import Venta.VentaConEntrega;
 
 
 public class VentaConEntregaTest {

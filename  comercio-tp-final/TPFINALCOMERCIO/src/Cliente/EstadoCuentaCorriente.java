@@ -2,7 +2,7 @@ package Cliente;
 
 import Excepciones.SaldoInsuficienteException;
 import Excepciones.SinCuentaCorrienteException;
-import Movimiento.VentaConCuentaCorriente;
+import Venta.VentaConCuentaCorriente;
 
 
 public abstract class EstadoCuentaCorriente {

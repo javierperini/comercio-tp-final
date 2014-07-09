@@ -4,8 +4,8 @@ import java.util.List;
 
 import Excepciones.SaldoInsuficienteException;
 import Excepciones.SinCuentaCorrienteException;
-import Movimiento.Venta;
-import Movimiento.VentaConCuentaCorriente;
+import Venta.Venta;
+import Venta.VentaConCuentaCorriente;
 
 
 

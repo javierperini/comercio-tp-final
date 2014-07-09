@@ -16,7 +16,7 @@ import Comercio.Comercio;
 import Comercio.OrdenDeCompra;
 import Excepciones.SaldoInsuficienteException;
 import Excepciones.SinCuentaCorrienteException;
-import Movimiento.VentaConCuentaCorriente;
+import Venta.VentaConCuentaCorriente;
 
 public class VentaConCuentaCorrienteTest {
 

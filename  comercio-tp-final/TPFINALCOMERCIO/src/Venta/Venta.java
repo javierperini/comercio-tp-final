@@ -38,7 +38,10 @@ public abstract class Venta extends Movimiento{
 		}
 	}
 	
-
+	
+	public void agregarVentaAlCliente() throws SinCuentaCorrienteException{
+		this.getCliente().addCompra(this);
+	}
 	public boolean perteneceA(Cliente cliente,List<OrdenDeCompra> ordenCompras, DateTime fecha) {
 		
 		return this.getFecha().isEqual(fecha) && this.getCliente().equals(cliente) ;

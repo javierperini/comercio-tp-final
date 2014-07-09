@@ -60,7 +60,6 @@ public class DevolucionTest {
 	@Test
 	public void testDevolverPlata(){		
 		this.devolucion.devolverPlata();
-		
 		verify(this.clienteMock, atLeastOnce()).depositar(devolucion.calcularImporte());
 	}
 	

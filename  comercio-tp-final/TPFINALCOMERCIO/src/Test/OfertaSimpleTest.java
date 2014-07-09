@@ -8,10 +8,10 @@ import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
-import Comercio.OfertaSimple;
-import Comercio.Presentacion;
-import Comercio.Producto;
-import Comercio.Unidad;
+import Oferta.OfertaSimple;
+import Producto.Presentacion;
+import Producto.Producto;
+import Producto.Unidad;
 
 public class OfertaSimpleTest {
 

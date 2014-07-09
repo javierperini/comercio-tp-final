@@ -10,13 +10,13 @@ import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
-import Comercio.Cliente;
+import Cliente.Cliente;
+import Cliente.CuentaCorriente;
 import Comercio.Comercio;
-import Comercio.CuentaCorriente;
 import Comercio.OrdenDeCompra;
-import Comercio.VentaConCuentaCorriente;
 import Excepciones.SaldoInsuficienteException;
 import Excepciones.SinCuentaCorrienteException;
+import Movimiento.VentaConCuentaCorriente;
 
 public class VentaConCuentaCorrienteTest {
 

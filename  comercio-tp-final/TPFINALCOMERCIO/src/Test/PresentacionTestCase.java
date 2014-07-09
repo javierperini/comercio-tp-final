@@ -6,18 +6,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import Comercio.EstadoStock;
-import Comercio.Presentacion;
-import Comercio.StockCritico;
-import Comercio.StockDisponible;
-import Comercio.StockMinimo;
-import Comercio.Ubicacion;
-import Comercio.Unidad;
 import Excepciones.NoTengoStock;
+import Producto.EstadoStock;
+import Producto.Presentacion;
+import Producto.StockCritico;
+import Producto.StockDisponible;
+import Producto.StockMinimo;
+import Producto.Ubicacion;
+import Producto.Unidad;
 
 
 public class PresentacionTestCase {
-	Presentacion leche1L;
+	Presentacion presentacion;
 	Ubicacion ubicacion;
 	Unidad unLitro;
 	NoTengoStock sinStock;
@@ -26,49 +26,67 @@ public class PresentacionTestCase {
 		this.sinStock= new NoTengoStock(); 
 		this.ubicacion=new Mockito().mock(Ubicacion.class);
 		this.unLitro=new Mockito().mock(Unidad.class);
-		this.leche1L= new Presentacion(this.unLitro,this.ubicacion,10d,2d,"222",15d,1d,4d);
+		this.presentacion= new Presentacion(this.unLitro,this.ubicacion,10d,2d,"222",15d,1d,4d);
 		}
+	
 	@Test
 	public void testDecrementarStock() throws NoTengoStock {
-		this.leche1L.decrementarStock(1d);
-		assertEquals(14d,this.leche1L.getStockTotal(),0);
+		this.presentacion.decrementarStock(1d);
+		assertEquals(14d,this.presentacion.getStockTotal(),0);
 		}
-	// DUDAS CON LA EXEPCION porque no uso TRY Y CATCH
+	
 	@Test(expected=NoTengoStock.class)
 	public void testDecrementarStockExepcion()throws NoTengoStock {
-		this.leche1L.decrementarStock(26d);
-		assertEquals(15,this.leche1L.getStockTotal(),0);
+		this.presentacion.decrementarStock(26d);
+		assertEquals(15,this.presentacion.getStockTotal(),0);
 	}
+	
 	@Test
 	public void testIncrementar(){
-		this.leche1L.incrementarStock(10d);
-		assertEquals(25d,this.leche1L.getStockTotal(),0);
+		this.presentacion.incrementarStock(10d);
+		assertEquals(25d,this.presentacion.getStockTotal(),0);
 	}
+	
 	@Test
 	public void mePaseDelStockCritico() throws NoTengoStock{
 		EstadoStock estado= new StockCritico();
-		this.leche1L.decrementarStock(12d);
-		assertEquals(estado.getClass(),this.leche1L.getEstado().getClass());
+		this.presentacion.decrementarStock(12d);
+		assertEquals(estado.getClass(),this.presentacion.getEstado().getClass());
 		
 	}
+	
 	@Test
 	public void mePaseDelStockMinimo() throws NoTengoStock{
-		EstadoStock estado= new StockMinimo();
-		this.leche1L.decrementarStock(14d);
-		assertEquals(estado.getClass(),this.leche1L.getEstado().getClass());
+		EstadoStock estado= new StockCritico();
+		EstadoStock estado2= new StockMinimo();
+		this.presentacion.decrementarStock(12d);
+		assertEquals(estado.getClass(),this.presentacion.getEstado().getClass());
+		this.presentacion.decrementarStock(3d);
+		assertEquals(estado2.getClass(),this.presentacion.getEstado().getClass());
+		this.presentacion.incrementarStock(15d);
+		this.presentacion.decrementarStock(12d);
+		assertEquals(estado2.getClass(),this.presentacion.getEstado().getClass());
 	}
+	
 	@Test
 	public void estoyEnStockDisponible() throws NoTengoStock{
 		EstadoStock estado= new StockDisponible();
-		this.leche1L.decrementarStock(11d);
-		this.leche1L.incrementarStock(20d);
-		assertEquals(estado.getClass(),this.leche1L.getEstado().getClass());
+		this.presentacion.decrementarStock(11d);
+		this.presentacion.incrementarStock(20d);
+		assertEquals(estado.getClass(),this.presentacion.getEstado().getClass());
 	}
+	
 	@Test
 	public void cambiarPrecioVenta(){
-		this.leche1L.cambiarPrecio(12d);
-		assertEquals(12d,this.leche1L.getPrecioVenta(),0);
-		assertEquals(1,this.leche1L.getPrecionAnteriores().size(),0);
+		this.presentacion.cambiarPrecio(12d);
+		assertEquals(12d,this.presentacion.getPrecioVenta(),0);
+		assertEquals(1,this.presentacion.getPrecionAnteriores().size(),0);
+	}
+	
+	@Test
+	public void getUnidadYUbicacion(){
+		assertEquals(this.ubicacion,this.presentacion.getUbicacion());
+		assertEquals(this.unLitro,this.presentacion.getUnidad());
 	}
 	
 

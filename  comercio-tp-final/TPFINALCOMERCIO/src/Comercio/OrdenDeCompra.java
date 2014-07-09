@@ -2,6 +2,9 @@ package Comercio;
 
 import org.joda.time.DateTime;
 
+import Producto.Producto;
+import Producto.Unidad;
+
 
 
 public class OrdenDeCompra {

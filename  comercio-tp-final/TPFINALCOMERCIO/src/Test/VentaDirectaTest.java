@@ -10,13 +10,13 @@ import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
-import Comercio.Cliente;
+import Cliente.Cliente;
 import Comercio.Comercio;
 import Comercio.OrdenDeCompra;
-import Comercio.Producto;
-import Comercio.Unidad;
-import Comercio.VentaDirecta;
 import Excepciones.NoTengoStock;
+import Movimiento.VentaDirecta;
+import Producto.Producto;
+import Producto.Unidad;
 
 
 

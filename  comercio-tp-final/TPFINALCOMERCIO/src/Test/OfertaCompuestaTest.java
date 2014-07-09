@@ -11,9 +11,9 @@ import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
-import Comercio.Oferta;
-import Comercio.OfertaCompuesta;
-import Comercio.OfertaSimple;
+import Oferta.Oferta;
+import Oferta.OfertaCompuesta;
+import Oferta.OfertaSimple;
 
 
 public class OfertaCompuestaTest {

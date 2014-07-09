@@ -12,13 +12,13 @@ import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
-import Comercio.Cambio;
-import Comercio.Cliente;
+import Cliente.Cliente;
 import Comercio.Comercio;
 import Comercio.OrdenDeCompra;
-import Comercio.Producto;
-import Comercio.Unidad;
 import Excepciones.NoTengoStock;
+import Movimiento.Cambio;
+import Producto.Producto;
+import Producto.Unidad;
 
 
 public class CambioTest {

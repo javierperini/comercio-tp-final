@@ -8,6 +8,19 @@ import java.util.Observable;
 
 import org.joda.time.DateTime;
 
+import Cliente.Cliente;
+import Movimiento.Cambio;
+import Movimiento.Devolucion;
+import Movimiento.Venta;
+import Movimiento.VentaConCuentaCorriente;
+import Movimiento.VentaConEntrega;
+import Movimiento.VentaDirecta;
+import Oferta.Oferta;
+import Oferta.OfertaCompuesta;
+import Oferta.OfertaSimple;
+import Producto.Producto;
+import Producto.Unidad;
+
 
 public class Comercio extends Observable {
 	private String nombre;
@@ -40,10 +53,10 @@ public class Comercio extends Observable {
 	 * @param unidad  
 	 * @param cantidad
 	 */
-	public void agregarProducto(Producto producto,Unidad unidad,int cantidad) {
+	public void agregarProducto(Producto producto,Unidad unidad,int cantidad,DateTime fecha) {
 		
 		this.productos.add(producto);
-		this.notificarClientes(producto, unidad,cantidad);
+		this.notificarClientes(producto, unidad,cantidad,fecha);
 	}
     /**
      * Cambia y notifica a sus observadores
@@ -51,10 +64,10 @@ public class Comercio extends Observable {
      * @param unidad
      * @param cantidad
      */
-	//TESTEAR
-	private void notificarClientes(Producto producto, Unidad unidad,double cantidad) {
-		DateTime today=new DateTime(2014, 10, 06, 00, 00) ;
-		OrdenDeCompra pedida=  new OrdenDeCompra(producto,unidad,cantidad,today);
+   
+	public void notificarClientes(Producto producto, Unidad unidad,double cantidad,DateTime fecha) {
+		
+		OrdenDeCompra pedida=  new OrdenDeCompra(producto,unidad,cantidad,fecha);
 		for(Cliente cliente: this.clientePedidos){
 			 cliente.avisoDePedido(pedida);
 		 }
@@ -281,15 +294,19 @@ public class Comercio extends Observable {
 		return false;
 	}//TESTEAR
 	public double getPrecioOfertaDe(Producto producto) {
-		 for (Oferta of:this.ofertas){
+		double var= 0d;
+		for (Oferta of:this.ofertas){
 			   if(of.perteneceA(producto))
-				   return of.getPrecioOferta();
+				   var= of.getPrecioOferta();
 		 }
-		return 0d;
+		return var;
 	} //TESTEAR
 	public void agregarAListaPedidos(Cliente cliente) {
 		this.clientePedidos.add(cliente);
 		
+	}
+	public int cantClientePedidos (){
+		return this.clientePedidos.size();
 	}
 
 	

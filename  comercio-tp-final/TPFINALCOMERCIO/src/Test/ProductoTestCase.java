@@ -9,72 +9,82 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import Comercio.Presentacion;
-import Comercio.Producto;
-import Comercio.Ubicacion;
-import Comercio.Unidad;
 import Excepciones.NoTengoStock;
+import Producto.Presentacion;
+import Producto.Producto;
+import Producto.Ubicacion;
+import Producto.Unidad;
 
 public class ProductoTestCase {
-	Producto lecheSancor;
-	Presentacion leche1l;
-	Presentacion leche2l;
-	Presentacion leche3l;
+	Producto producto;
+	Presentacion presentacion1L;
+	Presentacion presentacion2L;
+	Presentacion presentacion3L;
 	List<Presentacion>presentaciones;
-	Unidad unLitro;
-	Unidad dosLitro;
-	Ubicacion rfc2;
+	Unidad unidad1L;
+	Unidad unidad2L;
+	Unidad unidad3L;
+	Ubicacion ubicacion;
 	@Before
 	public void setUp(){
 		
 		//Creo los Mocks
-		this.unLitro=new Mockito().mock(Unidad.class);
-		this.dosLitro=new Mockito().mock(Unidad.class);
-		this.leche1l=new Mockito().mock(Presentacion.class);
-		this.leche2l=new Mockito().mock(Presentacion.class);
-		this.leche3l=new Mockito().mock(Presentacion.class);
-		this.rfc2=new Mockito().mock(Ubicacion.class);
+		this.unidad1L=new Mockito().mock(Unidad.class);
+		this.unidad2L=new Mockito().mock(Unidad.class);
+		this.unidad3L=new Mockito().mock(Unidad.class);
+		this.presentacion1L=new Mockito().mock(Presentacion.class);
+		this.presentacion2L=new Mockito().mock(Presentacion.class);
+		this.presentacion3L=new Mockito().mock(Presentacion.class);
+		this.ubicacion=new Mockito().mock(Ubicacion.class);
 		//Comportamientos de los Mocks
-		Mockito.when(this.leche1l.getUnidad()).thenReturn(this.unLitro);
-		Mockito.when(this.leche1l.getUbicacion()).thenReturn(this.rfc2);
-		Mockito.when(this.leche1l.getPrecioVenta()).thenReturn(14d);
-		Mockito.when(this.leche1l.getStockTotal()).thenReturn(19d);
-		Mockito.when(this.leche2l.getUnidad()).thenReturn(this.dosLitro);
-		Mockito.when(this.leche2l.getStockTotal()).thenReturn(21d);
-		Mockito.when(this.leche2l.getPrecioVenta()).thenReturn(14d);
+		Mockito.when(this.presentacion1L.getUnidad()).thenReturn(this.unidad1L);
+		Mockito.when(this.presentacion1L.getUbicacion()).thenReturn(this.ubicacion);
+		Mockito.when(this.presentacion1L.getPrecioVenta()).thenReturn(14d);
+		Mockito.when(this.presentacion1L.getStockTotal()).thenReturn(19d);
+		Mockito.when(this.presentacion2L.getUnidad()).thenReturn(this.unidad2L);
+		Mockito.when(this.presentacion2L.getStockTotal()).thenReturn(21d);
+		Mockito.when(this.presentacion2L.getPrecioVenta()).thenReturn(14d);
 		//Creo las listas
 		this.presentaciones=new ArrayList<Presentacion>();
 		//Agrego a las listas
-		this.presentaciones.add(leche1l);
-		this.presentaciones.add(leche2l);
-		this.presentaciones.add(leche3l);
+		this.presentaciones.add(presentacion1L);
+		this.presentaciones.add(presentacion2L);
+		this.presentaciones.add(presentacion3L);
 		
 		//Creo objetos concretos
-		this.lecheSancor=new Producto("leche", "Sancor", "descripcion", "comestible", presentaciones);
+		this.producto=new Producto("leche", "Sancor", "descripcion", "comestible", presentaciones);
 		
 	}
+	
 	@Test
 	public void testGetPresentacion() {
-		assertEquals(this.leche1l,this.lecheSancor.getPresentacion(this.unLitro));
+		assertEquals(this.presentacion1L,this.producto.getPresentacion(this.unidad1L));
+		assertEquals(3,this.producto.presentaciones().size(),0);
+		assertEquals(null,this.producto.getPresentacion(this.unidad3L));
 	}
+	
 	@Test
 	public void testGetUbicacion(){
-		assertEquals(this.rfc2,this.lecheSancor.getUbicacion(this.unLitro));
+		assertEquals(this.ubicacion,this.producto.getUbicacion(this.unidad1L));
 	}
+	
 	@Test
 	public void testPrecioDeVenta(){
-		this.lecheSancor.cambiarPrecioDeVenta(this.unLitro,14d);
-		assertEquals(14d,this.lecheSancor.getPrecioVenta(this.unLitro),0);
+		this.producto.cambiarPrecioDeVenta(this.unidad1L,14d);
+		assertEquals(14d,this.producto.getPrecioVenta(this.unidad1L),0);
 	}
+	
 	@Test
 	public void testDecrementarStock() throws NoTengoStock{
-		this.lecheSancor.decrementarStock(1d,this.unLitro);
-		assertEquals(19d,this.lecheSancor.stockTotal(this.unLitro),0);
+		this.producto.decrementarStock(1d,this.unidad1L);
+		assertEquals(19d,this.producto.stockTotal(this.unidad1L),0);
 	}
+	
 	@Test
 	public void testIncrementarStock(){
-		this.lecheSancor.incrementarStock(1d,this.dosLitro);
-		assertEquals(21d,this.lecheSancor.stockTotal(this.dosLitro),0);
+		this.producto.incrementarStock(1d,this.unidad2L);
+		assertEquals(21d,this.producto.stockTotal(this.unidad2L),0);
 	}
+	
 	
 }

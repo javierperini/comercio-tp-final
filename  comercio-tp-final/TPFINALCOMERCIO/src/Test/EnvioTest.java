@@ -8,13 +8,13 @@ import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
-import Comercio.Cancelado;
-import Comercio.Cliente;
+import Cliente.Cliente;
 import Comercio.Comercio;
-import Comercio.EnProceso;
-import Comercio.Entregado;
-import Comercio.Envio;
-import Comercio.Pendiente;
+import Envio.Cancelado;
+import Envio.EnProceso;
+import Envio.Entregado;
+import Envio.Envio;
+import Envio.Pendiente;
 
 
 

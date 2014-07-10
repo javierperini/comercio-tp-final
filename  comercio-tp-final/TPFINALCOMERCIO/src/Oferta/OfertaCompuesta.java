@@ -12,13 +12,12 @@ public class OfertaCompuesta extends Oferta{
 	private List<Oferta> ofertas;
 	
 	public OfertaCompuesta(String nombre, List<Oferta> unasOfertas, 
-			double descuento, int id, DateTime validoDesde, DateTime  validoHasta){		
+			double descuento, DateTime validoDesde, DateTime  validoHasta){		
 		
-		super(descuento, nombre, id, validoDesde, validoHasta);
+		super(descuento, nombre, validoDesde, validoHasta);
 		this.ofertas = new ArrayList<Oferta>();
 		this.setOfertas(unasOfertas);
 	}
-	
 	
 	public List<Oferta> getOfertas() {
 		return ofertas;
@@ -40,25 +39,13 @@ public class OfertaCompuesta extends Oferta{
 		return precioDeOferta - ((precioDeOferta*descuento)/100);
 	}
 
-	//TESTEAR
-	@Override
-	public boolean ofertaValida(Producto producto, DateTime fecha) {
-     	    for(Oferta o: this.getOfertas()){
-		    	if(o.ofertaValida(producto, fecha))
-		    		return true;
-		    }
-		return false;
-	}
-
-	//TESTEAR
 	@Override
 	public boolean perteneceA(Producto producto) {
-		
+		boolean ret = false;
 		    for(Oferta o: this.getOfertas()){
 		    	if(o.perteneceA(producto))
-		    		return true;
+		    		ret = true;
 		    }
-		return false;
-	}
-	
+		return ret;
+	}	
 }

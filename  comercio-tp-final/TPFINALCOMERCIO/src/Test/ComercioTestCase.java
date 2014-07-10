@@ -98,8 +98,8 @@ public class ComercioTestCase {
 	}
 	@Test
 	public void testGenerarOferta(){
-		this.comercio.generarOferta("Ofertaproducto1L",producto,this.unidad,23,1,fechaInicio,fechaInicio);
-		this.comercio.generarOfertas("MuchasOfertas",this.ofertas,20,2,fechaInicio,fechaInicio);
+		this.comercio.generarOferta("Ofertaproducto1L",producto,this.unidad,23,fechaInicio,fechaInicio);
+		this.comercio.generarOfertas("MuchasOfertas",this.ofertas,20,fechaInicio,fechaInicio);
 		assertEquals(2,this.comercio.ofertasRealizadas().size(),0);
 	}
 	@Test
@@ -146,7 +146,7 @@ public class ComercioTestCase {
 	}
 	@Test
 	public void estaEnOfertaYPrecioOferta(){
-		this.comercio.generarOferta("Oferta", this.producto, this.unidad, 12, 1212, this.fechaInicio, this.fechaFin);
+		this.comercio.generarOferta("Oferta", this.producto, this.unidad, 12, this.fechaInicio, this.fechaFin);
 		assertTrue(this.comercio.estaEnOferta(this.producto, this.fechaIntermedia));
 		assertEquals(10.56d,this.comercio.getPrecioOfertaDe(this.producto),0);
 	}

@@ -1,5 +1,6 @@
 package Cliente;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Excepciones.SaldoInsuficienteException;
@@ -16,6 +17,7 @@ public class CuentaCorriente {
 	private List<Venta> comprasConCuentacorriente;
 	
 	public CuentaCorriente(){
+		this.comprasConCuentacorriente = new ArrayList<Venta>();
 		this.estadoCC = new NoActiva();
 		this.setSaldo(0d);
 	}
@@ -38,11 +40,11 @@ public class CuentaCorriente {
 	public void setSaldo(double saldo) {
 		this.saldo = saldo;
 	}
-	//TESTEAR
+	
 	public List<Venta> getComprasConCuentacorriente() {
 		return this.comprasConCuentacorriente;
 	}
-	//TESTEAR
+	
 	public void agregarCompraConCuentaCorriente(VentaConCuentaCorriente compra){
 		this.comprasConCuentacorriente.add(compra);
 	}
@@ -58,7 +60,7 @@ public class CuentaCorriente {
 	public double saldo() throws SinCuentaCorrienteException{
 		return this.getEstadoCC().getSaldo(this);
 	}
-	//TESTEAR
+	
 	public void addCompra(VentaConCuentaCorriente compra) throws SinCuentaCorrienteException {
 		this.getEstadoCC().addCompra(compra, this);
 	}

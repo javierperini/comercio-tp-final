@@ -5,17 +5,15 @@ import org.joda.time.DateTime;
 import Producto.Producto;
 import Producto.Unidad;
 
-
-
 public class OfertaSimple extends Oferta{
 
 	private Producto unProducto;
 	private Unidad unaUnidad;
 
 	public OfertaSimple(String nombre, Producto unProducto, 
-			double descuento, Unidad unaUnidad, int id, DateTime validoDesde, DateTime  validoHasta) {
+			double descuento, Unidad unaUnidad, DateTime validoDesde, DateTime  validoHasta) {
 		
-		super(descuento, nombre, id, validoDesde, validoHasta);
+		super(descuento, nombre, validoDesde, validoHasta);
 		this.unProducto = unProducto;
 		this.unaUnidad = unaUnidad;
 	}
@@ -23,8 +21,6 @@ public class OfertaSimple extends Oferta{
 	public Producto getUnProducto() {
 		return unProducto;
 	}
-
-
 
 	public Unidad getUnaUnidad() {
 		return unaUnidad;
@@ -38,16 +34,9 @@ public class OfertaSimple extends Oferta{
 		double precioDeOferta = (precioDeVenta - (precioDeVenta*descuento)/100);
 		return precioDeOferta;
 	}
-	//TESTEAR
-	@Override
-	public boolean ofertaValida(Producto producto, DateTime fecha) {
-		
-       return  this.getUnProducto().equals(producto) && fecha.isAfter(this.getValidoDesde()) && fecha.isBefore(this.getValidoHasta());
-	}
-	//TESTEAR
+
 	@Override
 	public boolean perteneceA(Producto producto) {
-		
 		return this.getUnProducto().equals(producto);
 	}
 	

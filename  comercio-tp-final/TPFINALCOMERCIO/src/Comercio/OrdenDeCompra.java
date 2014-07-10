@@ -5,8 +5,6 @@ import org.joda.time.DateTime;
 import Producto.Producto;
 import Producto.Unidad;
 
-
-
 public class OrdenDeCompra {
 	
 	private Producto unProducto;
@@ -25,12 +23,9 @@ public class OrdenDeCompra {
 		return unProducto;
 	}
 
-
 	public Unidad getUnaUnidad() {
 		return unaUnidad;
 	}
-
-	
 
 	public double getCantidad() {
 		return this.cantidad;
@@ -43,6 +38,5 @@ public class OrdenDeCompra {
 	public DateTime getFecha() {
 		return this.fecha;
 	}
-
 	
 }

@@ -168,9 +168,9 @@ public class Comercio extends Observable {
 	 * @param fechaInicio inicio de la oferta
 	 * @param fechaFin    fin de la oferta
 	 */
-	public void generarOferta(String nombre,Producto producto,Unidad unidad,int descuento,int idOferta,DateTime fechaInicio,DateTime fechaFin) {
+	public void generarOferta(String nombre,Producto producto,Unidad unidad,int descuento,DateTime fechaInicio,DateTime fechaFin) {
 		
-		Oferta oferta=new OfertaSimple(nombre,producto,descuento,unidad,idOferta,fechaInicio,fechaFin);
+		Oferta oferta=new OfertaSimple(nombre,producto,descuento,unidad,fechaInicio,fechaFin);
 		this.ofertas.add(oferta);
 		this.enviarEmail(nombre);
 	}
@@ -203,9 +203,9 @@ public class Comercio extends Observable {
 	 * @param fechaInicio inicio de la oferta
 	 * @param fechaFin    fin de la oferta
 	 */
-	public void generarOfertas(String nombre,List<Oferta> ofertas,int descuento,int idOferta,DateTime fechaInicio,DateTime fechaFin) {
+	public void generarOfertas(String nombre,List<Oferta> ofertas,int descuento,DateTime fechaInicio,DateTime fechaFin) {
 	
-		Oferta oferta= new OfertaCompuesta(nombre,ofertas,descuento,idOferta,fechaInicio,fechaFin);
+		Oferta oferta= new OfertaCompuesta(nombre,ofertas,descuento,fechaInicio,fechaFin);
 		this.ofertas.add(oferta);
 		this.enviarEmail(nombre);
 	}
@@ -301,11 +301,12 @@ public class Comercio extends Observable {
 	} 
 	
 	public boolean estaEnOferta(Producto producto, DateTime fecha) {
+		boolean ret = false;
 		    for(Oferta oAct:this.ofertas){
-		    	if(oAct.ofertaValida(producto,fecha))
-		    	return true;
+		    	if(oAct.perteneceA(producto) && oAct.ofertaValida(fecha))
+				    	ret = true;
 		    }
-		return false;
+		return ret;
 	}
 	
 	public double getPrecioOfertaDe(Producto producto) {
@@ -324,7 +325,4 @@ public class Comercio extends Observable {
 	public int cantClientePedidos (){
 		return this.clientePedidos.size();
 	}
-
-	
-
 }

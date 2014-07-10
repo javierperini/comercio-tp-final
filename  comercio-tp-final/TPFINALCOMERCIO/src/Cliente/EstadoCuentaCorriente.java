@@ -4,7 +4,6 @@ import Excepciones.SaldoInsuficienteException;
 import Excepciones.SinCuentaCorrienteException;
 import Venta.VentaConCuentaCorriente;
 
-
 public abstract class EstadoCuentaCorriente {
 		
 	public abstract double getSaldo(CuentaCorriente cc) throws SinCuentaCorrienteException;

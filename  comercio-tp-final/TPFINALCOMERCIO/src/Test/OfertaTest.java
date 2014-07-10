@@ -23,7 +23,6 @@ public class OfertaTest {
 	Producto productoMock;
 	Unidad unidadMock;
 	Presentacion presentacionMock;
-	int id;
 	String nombre;
 	
 	@Before
@@ -31,7 +30,6 @@ public class OfertaTest {
 		this.productoMock = mock(Producto.class);
 		this.unidadMock = mock(Unidad.class);
 		this.presentacionMock = mock(Presentacion.class);
-		this.id = 1;		
 		this.nombre = "Oferta de pollo.";
 		
 		when(productoMock.getPresentacion(unidadMock)).thenReturn(presentacionMock);
@@ -42,18 +40,23 @@ public class OfertaTest {
 		this.fechaVigente = new DateTime("2014-04-20");
 		this.fechaNoVigente = new DateTime("2014-05-11");
 		this.oferta = new OfertaSimple(this.nombre, this.productoMock, 10d/*%*/, 
-				this.unidadMock ,this.id, this.validoDesde, this.validoHasta);
+				this.unidadMock, this.validoDesde, this.validoHasta);
 		
 	}
 
 	@Test
 	public void testUnaOfertaEstaVigente() {
-		//assertTrue(this.oferta.ofertaValida(fechaVigente));
+		assertTrue(this.oferta.ofertaValida(fechaVigente));
 	}
 	
 	@Test
 	public void testUnaOfertaNoEstaVigente() {
-		//assertFalse(this.oferta.ofertaValida(fechaNoVigente));
+		assertFalse(this.oferta.ofertaValida(fechaNoVigente));
+	}
+	
+	@Test
+	public void testGetValidaHasta(){
+		assertEquals(this.oferta.getValidoHasta(),this.validoHasta);
 	}
 
 }

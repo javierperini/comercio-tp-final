@@ -14,6 +14,7 @@ import org.junit.Test;
 import Oferta.Oferta;
 import Oferta.OfertaCompuesta;
 import Oferta.OfertaSimple;
+import Producto.Producto;
 
 
 public class OfertaCompuestaTest {
@@ -21,19 +22,18 @@ public class OfertaCompuestaTest {
 	OfertaSimple oferta1Mock;
 	OfertaSimple oferta2Mock;
 	double descuento;
-	int id;
 	OfertaCompuesta oferta;
 	DateTime validoDesde;
 	DateTime validoHasta;
 	String nombre;
-	
+	Producto unProductoMock;
 	
 	@Before
 	public void setUp(){
+		this.unProductoMock = mock(Producto.class);
 		this.oferta1Mock = mock(OfertaSimple.class);
 		this.oferta2Mock = mock(OfertaSimple.class);
 		this.descuento = 0.5;
-		this.id = 1;
 		this.validoDesde = new DateTime("2014-04-10"); 
 		this.validoHasta = new DateTime("2014-05-10");
 		this.nombre = "Oferta de Fernet + 2 cocas";
@@ -43,10 +43,11 @@ public class OfertaCompuestaTest {
 		ofertas.add(oferta1Mock);
 		ofertas.add(oferta2Mock);
 		
-		this.oferta = new OfertaCompuesta(this.nombre,ofertas,this.descuento, this.id, 
+		this.oferta = new OfertaCompuesta(this.nombre,ofertas,this.descuento, 
 				this.validoDesde, this.validoHasta);
 		
 		when(this.oferta1Mock.getPrecioOferta()).thenReturn(10d);
+		when(this.oferta1Mock.perteneceA(this.unProductoMock)).thenReturn(true);
 		when(this.oferta2Mock.getPrecioOferta()).thenReturn(20d);
 		
 	}
@@ -54,6 +55,11 @@ public class OfertaCompuestaTest {
 	@Test
 	public void testGetPrecioOferta() {		 
 		assertEquals(39.8, this.oferta.getPrecioOferta(), 0.000);
+	}
+	
+	@Test
+	public void testPerteneceA(){
+		assertTrue(this.oferta.perteneceA(this.unProductoMock));
 	}
 
 }

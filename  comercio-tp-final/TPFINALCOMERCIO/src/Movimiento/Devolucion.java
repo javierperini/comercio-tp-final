@@ -18,8 +18,6 @@ public class Devolucion extends Movimiento {
 		super(unCliente,listadoDeProductos,fecha,comercio);
 	}
 
-	//Quien le devuelve la plata al comercio? Xq si lo hace devolucion debe conocer al comercio.
-
 	public Cliente getCliente() {
 		return cliente;
 	}

@@ -32,16 +32,14 @@ public class Cliente implements Observer{
 		this.cuentaCorriente = new CuentaCorriente();
 	}
 	
-	
-	//TESTEAR
 	public List<Venta> getCompras() {
 		return this.compras;
 	}
-	//TESTEAR
+	
 	public String getNombre() {
 		return this.nombre;
 	}
-	//TESTEAR 
+	 
 	public EstadoSuscripto getEstadoS() {
 		return this.estadoS;
 	}
@@ -53,12 +51,11 @@ public class Cliente implements Observer{
 	public CuentaCorriente getCuentaCorriente() {
 		return this.cuentaCorriente;
 	}
-	//TESTEAR
+	
 	public void setCuentaCorriente(CuentaCorriente cuentaCorriente) {
 		this.cuentaCorriente = cuentaCorriente;
 	}
 
-	
 	public void depositar(double dinero){
 		this.getCuentaCorriente().aumentarSaldo(dinero);		
 	}
@@ -75,23 +72,16 @@ public class Cliente implements Observer{
 		this.compras.add(venta);
 	}
 
-	//TESTEAR
+
 	public void update(Observable o, Object arg) {
-		
 	    String nombreOferta = (String)arg;
-	    this.getEstadoS().enviarMail(nombreOferta);
-		
-		
+	    this.getEstadoS().enviarMail(nombreOferta, this);
 	}
 	
-	public void recibirCambio(List<OrdenDeCompra> listaDeProductosNueva) {
-		// TODO Auto-generated method stub
-		// lo pide victor
+	public void enviarMail(String nombreDeOferta){
+		System.out.println(nombreDeOferta);
 	}
-	public void pagarAlContado(double calcularImporte) {
-		// TODO Auto-generated method stub
-		//los pide victor
-	}
+	
 	//TESTEAR de la extencion
 	public void pedido(Producto producto, Unidad unidad, double cantidad,Comercio comercio){
 		comercio.agregarAListaPedidos(this);
@@ -100,12 +90,10 @@ public class Cliente implements Observer{
 	}
 	//TESTEAR de la extencion
 	public void avisoDePedido(OrdenDeCompra pedida) {
-	   if(this.ordenPedida.getCantidad()==pedida.getCantidad() && this.ordenPedida.getUnProducto().equals(pedida.getUnProducto()) && this.ordenPedida.getUnaUnidad()== pedida.getUnaUnidad()){
+	   if(this.ordenPedida.getCantidad()==pedida.getCantidad() && 
+			   this.ordenPedida.getUnProducto().equals(pedida.getUnProducto()) && 
+			   this.ordenPedida.getUnaUnidad()== pedida.getUnaUnidad())
 		    System.out.println("Esta en stock tu pedido");
-	   }
-		
 	}
-
-
 
 }

@@ -18,7 +18,6 @@ public class OfertaSimpleTest {
 	Producto unProductoMock;
 	Unidad unaUnidadMock;
 	Presentacion unaPresentacionMock;
-	int id;
 	double descuento = 10/*%*/;
 	OfertaSimple oferta;
 	DateTime validoDesde;
@@ -30,12 +29,11 @@ public class OfertaSimpleTest {
 		this.unProductoMock = mock(Producto.class);
 		this.unaUnidadMock = mock(Unidad.class);
 		this.unaPresentacionMock = mock(Presentacion.class);
-		this.id = 1;
 		this.validoDesde = new DateTime("2014-04-10"); 
 		this.validoHasta = new DateTime("2014-05-10");
 		this.nombre = "Oferta de Dulce de Leche Sancor de 500 g";
 		this.oferta = new OfertaSimple(this.nombre, this.unProductoMock, 
-				this.descuento, this.unaUnidadMock, this.id, this.validoDesde, this.validoHasta);
+				this.descuento, this.unaUnidadMock, this.validoDesde, this.validoHasta);
 
 		when(this.unProductoMock.getPresentacion(this.unaUnidadMock)).thenReturn(this.unaPresentacionMock);
 		when(this.unaPresentacionMock.getPrecioVenta()).thenReturn(10d);
@@ -45,6 +43,11 @@ public class OfertaSimpleTest {
 	public void testGetPrecioOferta() {		
 		double precioOferta = this.oferta.getPrecioOferta();
 		assertEquals(9, precioOferta, 0.00);
+	}
+	
+	@Test
+	public void testPerteneceA(){
+		assertTrue(this.oferta.perteneceA(unProductoMock));
 	}
 
 }

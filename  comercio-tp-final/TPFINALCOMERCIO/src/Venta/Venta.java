@@ -1,4 +1,5 @@
 package Venta;
+
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -11,19 +12,13 @@ import Excepciones.SaldoInsuficienteException;
 import Excepciones.SinCuentaCorrienteException;
 import Movimiento.Movimiento;
 
-
-
-
-public abstract class Venta extends Movimiento{
-	
-	
+public abstract class Venta extends Movimiento{	
 	/**
 	 *CONSTRUCTOR
 	 */
 	public Venta(Cliente unCliente, List<OrdenDeCompra> listadoDeProductos,DateTime fecha,Comercio comercio) {
 		super(unCliente, listadoDeProductos,fecha,comercio);
 	}
-
 	
 	/**
 	 *Decrementa el stock de los productos que estan en la lista dada por el cliente.

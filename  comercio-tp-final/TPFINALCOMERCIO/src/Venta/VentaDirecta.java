@@ -9,8 +9,6 @@ import Comercio.OrdenDeCompra;
 import Excepciones.SaldoInsuficienteException;
 import Excepciones.SinCuentaCorrienteException;
 
-
-
 public class VentaDirecta extends Venta{
 	
 	/**
@@ -18,6 +16,5 @@ public class VentaDirecta extends Venta{
 	 */
 	public VentaDirecta(Cliente unCliente, List<OrdenDeCompra> listadoDeProductos, DateTime unaFecha,Comercio comercio) {
 		super(unCliente, listadoDeProductos,unaFecha,comercio);
-		
 	}	
 }

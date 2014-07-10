@@ -68,4 +68,11 @@ public class EnvioTest {
 		this.envio.cancelarEnvio();
 		assertTrue(envio.getEstadoDeEnvio().getClass() == Cancelado.class);
 	}
+	
+	@Test
+	public void getFechaTest(){
+		this.envio.setEstadoDeEnvio(new Reprogramado());
+		this.envio.setFechaDeSalida(2014, 10, 7, 00, 00);
+		assertTrue(this.envio.getFecha() == (2014, 10, 7, 00, 00));
+	}
 }

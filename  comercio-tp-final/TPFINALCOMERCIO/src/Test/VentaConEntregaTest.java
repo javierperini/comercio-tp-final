@@ -31,7 +31,7 @@ public class VentaConEntregaTest {
 	public Unidad litrosMock;
 	public Unidad kilosMock;
 	public DateTime hoy;
-	public DateTime mañana;
+	public DateTime maÃ±ana;
 	public Comercio comercioMock;
 	
 	@Before
@@ -45,7 +45,7 @@ public class VentaConEntregaTest {
 		lecheMock = mock(Producto.class);
 		carneMock = mock(Producto.class);
 		hoy=new DateTime(2014, 10, 06, 00, 00);
-		mañana=new DateTime(2014, 11, 06, 00, 00);
+		maÃ±ana=new DateTime(2014, 11, 06, 00, 00);
 		comercioMock = mock(Comercio.class);
 		
 		when(this.clienteMock.getNombre()).thenReturn("Oscar");

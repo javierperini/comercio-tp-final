@@ -77,7 +77,6 @@ public class Envio {
 		this.estadoDeEnvio = estadoDeEnvio;
 	}
 	
-   //TESTEAR
 	/**
 	 *Fecha de salida del envio.
 	 */

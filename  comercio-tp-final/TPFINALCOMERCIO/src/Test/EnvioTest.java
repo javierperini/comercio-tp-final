@@ -15,6 +15,7 @@ import Envio.EnProceso;
 import Envio.Entregado;
 import Envio.Envio;
 import Envio.Pendiente;
+import Envio.Reprogramado;
 
 
 
@@ -73,6 +74,6 @@ public class EnvioTest {
 	public void getFechaTest(){
 		this.envio.setEstadoDeEnvio(new Reprogramado());
 		this.envio.setFechaDeSalida(2014, 10, 7, 00, 00);
-		assertTrue(this.envio.getFecha() == (2014, 10, 7, 00, 00));
+		assertTrue(this.envio.getFecha().isEquals(2014, 10, 7, 00, 00));
 	}
 }

@@ -37,8 +37,7 @@ public class OrdenDeCompra {
 	}
 	
 	public double getPrecio(){
-		return (this.getCantidad())*
-		(this.getUnProducto().getPresentacion(this.getUnaUnidad()).getPrecioVenta(/*this.getFecha()*/));
+		return (this.getCantidad())*(this.getUnProducto().getPresentacion(this.getUnaUnidad()).getPrecioVenta());
 	}
 	
 	public DateTime getFecha() {

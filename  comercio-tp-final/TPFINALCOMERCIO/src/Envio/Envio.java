@@ -89,7 +89,7 @@ public class Envio {
 	 *Modifica la fecha de salida del envio.
      * @param fechaDeSalida nueva fecha.
 	 */
-	 */
+	 
 	public void setFechaDeSalida(DateTime fechaDeSalida) {
 		this.fechaDeSalida = fechaDeSalida;
 	}

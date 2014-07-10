@@ -1,4 +1,5 @@
 package Test;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -9,11 +10,13 @@ import java.util.ArrayList;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import Cliente.Cliente;
 import Comercio.Comercio;
 import Comercio.OrdenDeCompra;
 import Excepciones.NoTengoStock;
+import Producto.Presentacion;
 import Producto.Producto;
 import Producto.Unidad;
 import Venta.VentaDirecta;
@@ -33,6 +36,7 @@ public class VentaDirectaTest {
 	public Unidad kilosMock;
 	public DateTime hoy;
 	public Comercio comercioMock;
+	public Presentacion presentacion;
 	
 	@Before
 	
@@ -40,26 +44,18 @@ public class VentaDirectaTest {
 
 		///MOCKS
 		clienteMock = mock(Cliente.class);
-		ordenMock = mock(OrdenDeCompra.class);
-		ordenMock2 = mock(OrdenDeCompra.class);
 		lecheMock = mock(Producto.class);
 		carneMock = mock(Producto.class);
 		comercioMock=mock(Comercio.class);
+		kilosMock= mock(Unidad.class);
+		litrosMock= mock(Unidad.class);
+		presentacion= mock(Presentacion.class);
 		hoy=new DateTime(2014, 10, 06, 00, 00);
-		
-		when(this.clienteMock.getNombre()).thenReturn("Oscar");
-		
-		when(this.ordenMock.getUnProducto()).thenReturn(lecheMock);
-		when(this.ordenMock2.getUnProducto()).thenReturn(carneMock);
-		
-		when(this.ordenMock.getPrecio()).thenReturn(14d);
-		when(this.ordenMock2.getPrecio()).thenReturn(40d);
-		
-		when(this.ordenMock.getCantidad()).thenReturn(1d);
-		when(this.ordenMock2.getCantidad()).thenReturn(3d);
-		
-		when(this.ordenMock2.getUnaUnidad()).thenReturn(new Unidad());
-		
+		ordenMock = new OrdenDeCompra(carneMock, kilosMock, 1d, hoy);
+		ordenMock2 = new OrdenDeCompra(lecheMock, litrosMock, 3d, hoy);
+		when(lecheMock.getPresentacion(litrosMock)).thenReturn(presentacion);
+		when(carneMock.getPresentacion(kilosMock)).thenReturn(presentacion);
+		when(presentacion.getPrecioVenta()).thenReturn(27d);
 		
 		///Lista de compras
 		this.listaDeCompras = new ArrayList<OrdenDeCompra>();
@@ -73,18 +69,12 @@ public class VentaDirectaTest {
 	@Test
 	public void alModificarElStockSeEnviaElMensajeDecrementarStockALosProductosDeLaLista() throws NoTengoStock {
 		this.ventaD.modificarStock();
-		verify(this.lecheMock,times(1)).decrementarStock(1, litrosMock);
-		verify(this.carneMock,times(1)).decrementarStock(3, kilosMock);		
-	}
-	
-	@Test(expected=NoTengoStock.class)
-	public void siAlModificarElStockElProductoNoCuentaConLaCantidadSeLanzaLaExcepcion() throws NoTengoStock {
-		when(this.carneMock.decrementarStock(this.ordenMock2.getCantidad(), this.ordenMock2.getUnidad())).thenThrows(new NoTengoStock());
-		this.ventaD.modificarStock();		
+		verify(this.lecheMock,times(1)).decrementarStock(3d, litrosMock);
+		verify(this.carneMock,times(1)).decrementarStock(1d, kilosMock);		
 	}
 	
 	@Test
 	public void calcularImporteTest(){
-		assertEquals(54d,this.ventaD.calcularImporte(),0);
+		assertEquals(108d,this.ventaD.calcularImporte(),0);
 	}
 }

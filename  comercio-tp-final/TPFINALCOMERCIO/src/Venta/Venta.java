@@ -25,7 +25,6 @@ public abstract class Venta extends Movimiento{
 	}
 
 	
-	//TESTEAR
 	/**
 	 *Decrementa el stock de los productos que estan en la lista dada por el cliente.
 	 */

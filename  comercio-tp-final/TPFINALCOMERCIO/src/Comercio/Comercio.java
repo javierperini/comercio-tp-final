@@ -1,14 +1,13 @@
 package Comercio;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Observable;
 
 import org.joda.time.DateTime;
 
 import Cliente.Cliente;
+import Envio.Envio;
 import Excepciones.SinCuentaCorrienteException;
 import Movimiento.Cambio;
 import Movimiento.Devolucion;
@@ -33,6 +32,7 @@ public class Comercio extends Observable {
 	private List<Venta> ventas;
 	private List<Devolucion> devoluciones;
 	private List <Cambio>cambios;
+	private List<Envio> enviosPendientes;
 	
 	
 	public Comercio(String nombre, List<Producto> productos) {
@@ -46,6 +46,31 @@ public class Comercio extends Observable {
 		this.devoluciones=new ArrayList<Devolucion>();
 		this.ofertas=new ArrayList<Oferta>();
 		this.clientePedidos= new ArrayList<Cliente>();
+		this.enviosPendientes=new ArrayList<Envio>();
+		
+	}
+	
+	/**
+	 * 
+	 * @param envio hecho algun cliente
+	 */
+	public void agregarEnvioAListaDePendientes(Envio envio){
+		this.enviosPendientes.add(envio);
+	}
+	
+	/**
+	 * Precondicon: el envio tiene que estar en la lista;
+	 * @param envio hecho algun cliente
+	 */
+	public void quitarEnvioAListaDePendientes(Envio envio){
+		this.enviosPendientes.remove(envio);
+	}
+	/**
+	 * 
+	 * @return la lista de envios pendientes
+	 */
+	public List<Envio> getEnviosPendientes(){
+		return this.enviosPendientes;
 	}
 	
 	/**
@@ -285,6 +310,7 @@ public class Comercio extends Observable {
 		
 		return this.cambios;
 	}
+	
 	/**
 	 * Creo un objeto cambio y lo agrego a la lista de cambios
 	 * @param cliente
@@ -292,7 +318,6 @@ public class Comercio extends Observable {
 	 * @param ordenComprasNueva
 	 * @param fecha
 	 */
-	
 	public void generarCambio(Cliente cliente, List<OrdenDeCompra> ordenCompras, List<OrdenDeCompra> ordenComprasNueva, DateTime fecha) {
 		
 		Cambio cambio= new Cambio(cliente,ordenCompras,ordenComprasNueva,fecha,this);
@@ -300,6 +325,12 @@ public class Comercio extends Observable {
 		this.cambios.add(cambio);
 	} 
 	
+	/**
+	 * 
+	 * @param producto 
+	 * @param fecha 
+	 * @return si un producto esta en oferta o no
+	 */
 	public boolean estaEnOferta(Producto producto, DateTime fecha) {
 		boolean ret = false;
 		    for(Oferta oAct:this.ofertas){
@@ -308,7 +339,11 @@ public class Comercio extends Observable {
 		    }
 		return ret;
 	}
-	
+	/**
+	 * 
+	 * @param producto
+	 * @return el precio de una oferta si el producto esta en oferta
+	 */
 	public double getPrecioOfertaDe(Producto producto) {
 		double var= 0d;
 		for (Oferta of:this.ofertas){
@@ -318,10 +353,18 @@ public class Comercio extends Observable {
 		return var;
 	} 
 	
+	/**
+	 *  agregar un cliente a la lista de pedidos a enviar
+	 * @param cliente 
+	 */
 	public void agregarAListaPedidos(Cliente cliente) {
 		this.clientePedidos.add(cliente);
 		
 	}
+	/**
+	 * 
+	 * @return la cantidad de clientes que tiene envios pendientes
+	 */
 	public int cantClientePedidos (){
 		return this.clientePedidos.size();
 	}

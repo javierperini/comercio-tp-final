@@ -73,7 +73,11 @@ public class EnvioTest {
 	@Test
 	public void getFechaTest(){
 		this.envio.setEstadoDeEnvio(new Reprogramado());
-		this.envio.setFechaDeSalida(2014, 10, 7, 00, 00);
-		assertTrue(this.envio.getFecha().isEquals(2014, 10, 7, 00, 00));
+		// cuando pones una fecha la tenes que instanciar  y fijate que tambien hay un 
+		//assertEquals (espero, loQueRetorna,y la diferencia"Si es un numero");
+		//CUANDO LOS LEAS BORRALOS
+		DateTime fecha= new DateTime(2014, 10, 7, 00, 00);
+		this.envio.setFechaDeSalida(fecha);
+		assertTrue(this.envio.getFechaDeSalida().isEqual(fecha));
 	}
 }

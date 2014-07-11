@@ -13,16 +13,22 @@ import org.mockito.Mockito;
 import Cliente.Cliente;
 import Comercio.Comercio;
 import Comercio.OrdenDeCompra;
-import Comercio.Reporte;
 import Excepciones.SinCuentaCorrienteException;
 import Producto.Presentacion;
 import Producto.Producto;
 import Producto.Unidad;
+import Reportes.FiltrarVentaPorMonto;
+import Reportes.FiltroPorProducto;
+import Reportes.FiltroProductoStockCritco;
+import Reportes.FiltroProductoStockMinimo;
+import Reportes.FiltroVentaPorFecha;
+import Reportes.Reporte;
+import Venta.Venta;
 
 
 
 public class ReportesTest {
-	Reporte reporte;
+	Reporte<Venta> reporte;
 	Comercio comercio;
 	OrdenDeCompra orden1;
 	OrdenDeCompra orden2;
@@ -40,6 +46,7 @@ public class ReportesTest {
 	DateTime fecha4;
 	List<OrdenDeCompra> listaOrden;
 	ArrayList<Producto> listaProducto;
+
 	
 	@Before
 	public void setUp(){
@@ -55,12 +62,26 @@ public class ReportesTest {
 		this.fecha2=new  DateTime(2014, 11, 03, 00, 00);
 		this.fecha3= new DateTime(2014, 10, 16, 00, 00);
 		this.fecha4= new DateTime(2014, 10, 12, 00, 00);
+
+	
 		Mockito.when(this.pan.getPresentacion(unidad1)).thenReturn(this.presentacion2K);
 		Mockito.when(this.leche.getPresentacion(unidad2)).thenReturn(this.presentacion1L);
+		Mockito.when(this.pan.presentacionesSuperanStockMinimo()).thenReturn(true);
+		Mockito.when(this.leche.presentacionesSuperanStockMinimo()).thenReturn(false);
+		Mockito.when(this.pan.presentacionesSuperanStockCritico()).thenReturn(false);
+		Mockito.when(this.leche.presentacionesSuperanStockCritico()).thenReturn(true);
 		Mockito.when(this.presentacion1L.getPrecioVenta()).thenReturn(30d);
 		Mockito.when(this.presentacion2K.getPrecioVenta()).thenReturn(20d);
+		Mockito.when(this.presentacion1L.getStockMin()).thenReturn(2d);
+		Mockito.when(this.presentacion2K.getStockMin()).thenReturn(2d);
+		Mockito.when(this.presentacion1L.getStockCri()).thenReturn(4d);
+		Mockito.when(this.presentacion2K.getStockCri()).thenReturn(3d);
+		Mockito.when(this.presentacion2K.getStockTotal()).thenReturn(1d);
+		Mockito.when(this.presentacion1L.getStockTotal()).thenReturn(1d);
+		
 		this.orden1= new OrdenDeCompra(this.pan,unidad1,2d, fecha1);
 		this.orden2= new OrdenDeCompra(this.leche,unidad2,1d, fecha2);
+		
 		this.listaOrden= new ArrayList<OrdenDeCompra>();
 		this.listaOrden.add(this.orden1);
 		this.listaOrden.add(this.orden2);
@@ -70,7 +91,7 @@ public class ReportesTest {
 		
 		
 		this.comercio= new Comercio("Nombre", listaProducto);
-		this.reporte= new Reporte(this.comercio);
+		this.reporte= new Reporte<Venta>(this.comercio);
 		
 	}
 
@@ -80,9 +101,15 @@ public class ReportesTest {
 		this.comercio.generarVentaDirecta(this.cliente, this.listaOrden, this.fecha2);
 		this.comercio.generarVentaDirecta(this.cliente, this.listaOrden, this.fecha3);
 		this.comercio.generarVentaDirecta(this.cliente, this.listaOrden, this.fecha4);
-		assertEquals(3,this.reporte.filtrarVentaPorFecha(this.fecha1,this.fecha3).size(),0);
-		assertEquals(4,this.reporte.filtrarVentaPorFecha(this.fecha1,this.fecha4).size(),0);
-		assertEquals(1,this.reporte.filtrarVentaPorFecha(this.fecha4,this.fecha4).size(),0);
+		FiltroVentaPorFecha<Venta> filtro= new FiltroVentaPorFecha<Venta>(this.fecha2,this.fecha1); 
+		this.reporte.setStrategy(filtro);
+		assertEquals(2,this.reporte.filtrar().size(),0);
+		filtro.setFechaMax(fecha4);
+		filtro.setFechaMin(fecha3);
+		assertEquals(2,this.reporte.filtrar().size(),0);
+		filtro.setFechaMax(fecha4);
+		filtro.setFechaMin(fecha1);
+		assertEquals(4,this.reporte.filtrar().size(),0);
 	}
 	@Test
 	public void filtrarVentasporProducto() throws SinCuentaCorrienteException {
@@ -90,19 +117,40 @@ public class ReportesTest {
 		this.comercio.generarVentaDirecta(this.cliente, this.listaOrden, this.fecha2);
 		this.comercio.generarVentaDirecta(this.cliente, this.listaOrden, this.fecha3);
 		this.comercio.generarVentaDirecta(this.cliente, this.listaOrden, this.fecha4);
-		assertEquals(4,this.reporte.filtrarVentaPorProducto(this.leche).size(),0);
-		assertEquals(4,this.reporte.filtrarVentaPorProducto(this.pan).size(),0);
-		assertEquals(0,this.reporte.filtrarVentaPorProducto(this.queso).size(),0);
-	}
+		FiltroPorProducto<Venta> porProducto= new FiltroPorProducto<Venta>(this.leche);
+		this.reporte.setStrategy(porProducto);
+		assertEquals(4,this.reporte.filtrar().size(),0);
+		porProducto.setProducto(this.pan);
+		assertEquals(4,this.reporte.filtrar().size(),0);
+		porProducto.setProducto(this.queso);
+		assertEquals(0,this.reporte.filtrar().size(),0);
+		}
 	@Test
 	public void filtrarVentasporMonto() throws SinCuentaCorrienteException {
 		this.comercio.generarVentaDirecta(this.cliente, this.listaOrden, this.fecha1);
 		this.comercio.generarVentaDirecta(this.cliente, this.listaOrden, this.fecha2);
 		this.comercio.generarVentaDirecta(this.cliente, this.listaOrden, this.fecha3);
 		this.comercio.generarVentaDirecta(this.cliente, this.listaOrden, this.fecha4);
-		assertEquals(4,this.reporte.filtrarVentaPorMonto(11d,500d).size(),0);
-		assertEquals(4,this.reporte.filtrarVentaPorMonto(0d,10d).size(),0);
-		assertEquals(0,this.reporte.filtrarVentaPorMonto(1000d,5000d).size(),0);
-	
+		FiltrarVentaPorMonto<Venta> filtro= new FiltrarVentaPorMonto<Venta>(11d,500d);
+		this.reporte.setStrategy(filtro);
+		assertEquals(4,this.reporte.filtrar().size(),0);
+		filtro.setMax(10d);
+		filtro.setMin(0d);
+		assertEquals(0,this.reporte.filtrar().size(),0);
+		filtro.setMax(1000d);
+		filtro.setMin(20d);
+		assertEquals(4,this.reporte.filtrar().size(),0);
 	}
+	@Test
+	public void filtrarProductoDebajoStockMinimo(){
+		FiltroProductoStockMinimo filtro= new FiltroProductoStockMinimo();
+		this.reporte.setStrategy(filtro);
+		assertEquals(1,this.reporte.filtrar().size(),0);
+	 }
+	@Test
+	public void filtrarProductoDebajoStockCritico(){
+		FiltroProductoStockCritco filtro= new FiltroProductoStockCritco();
+		this.reporte.setStrategy(filtro);
+		assertEquals(1,this.reporte.filtrar().size(),0);
+	 }
 }

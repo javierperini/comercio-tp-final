@@ -50,6 +50,10 @@ public class Comercio extends Observable {
 		
 	}
 	
+	public List<Producto> getProductos(){
+		return this.productos;
+	}
+	
 	/**
 	 * 
 	 * @param envio hecho algun cliente

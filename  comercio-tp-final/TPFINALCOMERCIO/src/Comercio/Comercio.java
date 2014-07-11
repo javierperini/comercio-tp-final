@@ -374,15 +374,29 @@ public class Comercio extends Observable {
 	public int cantClientePedidos (){
 		return this.clientePedidos.size();
 	}
-
+	
+	/**
+	 * Agrega los cliente que compraron a una lista de clientes resgistrados
+	 * @param cliente 
+	 */
 	public void agregarCliente(Cliente cliente) {
 		this.clientesRegistrados.add(cliente);
 		
 	}
+	
+	/**
+	 * 
+	 * @return Retorna la lista de clientes registrados
+	 */
 	public List<Cliente> getCliente(){
 		return this.clientesRegistrados;
 	}
-
+	
+	/**
+	 * 
+	 * @param cliente parametro de busqueda
+	 * @return retorna si un cliente compro alguna vez 
+	 */
 	public boolean estaRegistrado(Cliente cliente) {
 		 boolean resultado= false;
 		 for(Cliente cAct:this.clientesRegistrados){

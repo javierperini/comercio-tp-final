@@ -46,6 +46,7 @@ public class EnvioTest {
 	public void cuandoLlegaLaFechaDeSalidaElEnvioCambiaSuEstadoAEnProceso(){
 		envio.enviar();
 		assertTrue(this.envio.getEstadoDeEnvio().getClass().equals(EnProceso.class));
+		verify(this.comercioMock,times(1)).quitarEnvioAListaDePendientes(envio);
 	}
 
 	@Test
@@ -54,6 +55,7 @@ public class EnvioTest {
 		this.envio.elClienteNoSeEncuentra();
 		this.envio.reprogramarFechaDeSalida(new DateTime(2014, 10, 7, 00, 00));
 		assertTrue(this.envio.getEstadoDeEnvio().getClass().equals(Pendiente.class));
+		verify(this.comercioMock,times(1)).agregarEnvioAListaDePendientes(envio);
 	}
 	
 	@Test
@@ -73,9 +75,6 @@ public class EnvioTest {
 	@Test
 	public void getFechaTest(){
 		this.envio.setEstadoDeEnvio(new Reprogramado());
-		// cuando pones una fecha la tenes que instanciar  y fijate que tambien hay un 
-		//assertEquals (espero, loQueRetorna,y la diferencia"Si es un numero");
-		//CUANDO LOS LEAS BORRALOS
 		DateTime fecha= new DateTime(2014, 10, 7, 00, 00);
 		this.envio.setFechaDeSalida(fecha);
 		assertTrue(this.envio.getFechaDeSalida().isEqual(fecha));

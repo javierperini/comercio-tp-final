@@ -15,6 +15,7 @@ public class Activa extends EstadoCuentaCorriente{
 	 * @param este parametro refiere al saldo a depositar en la cuenta corriente.
 	 * @param este parametro refiere a la cuenta corriente donde se depositara el saldo.
 	 */
+	@Override
 	public void setSaldo(double saldo, CuentaCorriente cc){
 		cc.setSaldo(saldo + cc.getSaldo());
 	}

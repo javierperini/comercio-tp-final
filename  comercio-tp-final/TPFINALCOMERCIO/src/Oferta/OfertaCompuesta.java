@@ -42,6 +42,7 @@ public class OfertaCompuesta extends Oferta{
 	/**
 	 * @return retorna el precio de la oferta
 	 */
+	@Override
 	public double getPrecioOferta() {
 		
 		double descuento = this.getDescuento();

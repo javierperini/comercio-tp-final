@@ -24,7 +24,7 @@ public class Cambio extends Movimiento {
 	/**
 	 *-Calcular el importe total de la nueva lista de productos que el cliente quiere a cambio.
 	 */
-	public Double calcularImporteDeLaListaNueva(){
+	public double calcularImporteDeLaListaNueva(){
 		Double monto = 0d;
 		for (OrdenDeCompra orden : this.listaDeProductosNueva) {
 			monto+=orden.getPrecio();

@@ -12,7 +12,7 @@ import Excepciones.SaldoInsuficienteException;
 import Excepciones.SinCuentaCorrienteException;
 import Movimiento.Movimiento;
 
-public abstract class Venta extends Movimiento{	
+public class Venta extends Movimiento{	
 	/**
 	 *CONSTRUCTOR
 	 */
@@ -49,8 +49,6 @@ public abstract class Venta extends Movimiento{
 	 * @param fecha
 	 */
 	public boolean perteneceA(Cliente cliente,List<OrdenDeCompra> ordenCompras, DateTime fecha) {
-		
 		return this.getFecha().isEqual(fecha) && this.getCliente().equals(cliente) ;
 	}
-
 }

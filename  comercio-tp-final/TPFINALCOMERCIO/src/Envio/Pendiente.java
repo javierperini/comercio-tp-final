@@ -1,8 +1,5 @@
 package Envio;
 
-
-
-
 public class Pendiente extends EstadoDeEnvio {
 
 	

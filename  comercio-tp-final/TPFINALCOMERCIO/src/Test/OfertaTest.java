@@ -55,8 +55,18 @@ public class OfertaTest {
 	}
 	
 	@Test
+	public void testGetValidaDesde(){
+		assertEquals(this.oferta.getValidoDesde(),this.validoDesde);
+	}
+	
+	@Test
 	public void testGetValidaHasta(){
 		assertEquals(this.oferta.getValidoHasta(),this.validoHasta);
+	}
+	
+	@Test
+	public void testGetNombre(){
+		assertEquals(this.oferta.getNombre(),"Oferta de pollo.");
 	}
 
 }

@@ -93,14 +93,14 @@ public class Comercio extends Observable {
 	}
     
 	/**
-     * Cambia y notifica a sus observadores
+     * Cambia y notifica a sus observadores de que se creo una OrdenDeCompra  que trata de satisfacer sus necesidades.
      * @param producto
      * @param unidad
      * @param cantidad
      */
    public void notificarClientes(Producto producto, Unidad unidad,double cantidad,DateTime fecha) {
-		
 		OrdenDeCompra pedida=  new OrdenDeCompra(producto,unidad,cantidad,fecha);
+		//pedida: orden de compra que trata de satisfacer la necesidad del cliente.
 		for(Cliente cliente: this.clientePedidos){
 			 cliente.avisoDePedido(pedida);
 		 }

@@ -23,7 +23,7 @@ public class Cliente implements Observer{
 	private String nombre;
 	private EstadoSuscripto estadoS;
 	private CuentaCorriente cuentaCorriente;
-	private OrdenDeCompra ordenPedida;
+	private List<OrdenDeCompra> ordenesPedidas;
 	
 	/**
 	 * CONSTRUCTOR
@@ -34,6 +34,7 @@ public class Cliente implements Observer{
 		this.nombre=nombre;
 		this.setEstadoS(new NoSuscripto());
 		this.cuentaCorriente = new CuentaCorriente();
+		this.ordenesPedidas = new ArrayList<OrdenDeCompra>();
 	}
 	
 	/**
@@ -134,16 +135,23 @@ public class Cliente implements Observer{
 		System.out.println(nombreDeOferta);
 	}
 	
-
+	public boolean estaTodoMiPedido(OrdenDeCompra ordenPedida, OrdenDeCompra pedida){
+		return (ordenPedida.getCantidad()==pedida.getCantidad() && 
+				   ordenPedida.getUnProducto().equals(pedida.getUnProducto()) && 
+				   ordenPedida.getUnaUnidad()== pedida.getUnaUnidad());
+	}
+	
+	
 	/**
 	 *  Simula el aviso del comercio al cliente cuando sus productos se encuentran en stock
 	 * @param pedida
 	 */
 	public void avisoDePedido(OrdenDeCompra pedida) {
-	   if(this.ordenPedida.getCantidad()==pedida.getCantidad() && 
-			   this.ordenPedida.getUnProducto().equals(pedida.getUnProducto()) && 
-			   this.ordenPedida.getUnaUnidad()== pedida.getUnaUnidad())
-		    System.out.println("Esta en stock tu pedido");
+		for(OrdenDeCompra o : this.ordenesPedidas){
+			if(this.estaTodoMiPedido(o, pedida)){
+			    System.out.println("Esta en stock tu pedido");
+			}
+		}
 	}
 
 }

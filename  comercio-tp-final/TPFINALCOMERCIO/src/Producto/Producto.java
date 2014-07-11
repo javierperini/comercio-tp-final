@@ -104,4 +104,22 @@ public class Producto {
 		return this.getPresentacion(unidad).getPrecioVenta();
 	}
 
+	public boolean presentacionesSuperanStockMinimo() {
+		boolean  resultado=false;
+		for(Presentacion pAct: this.presentaciones()){
+			if(pAct.getStockMin()> pAct.getStockTotal())
+				resultado=true;
+		}
+		return resultado;
+	}
+	
+	public boolean presentacionesSuperanStockCritico() {
+		boolean  resultado=false;
+		for(Presentacion pAct: this.presentaciones()){
+			if(pAct.getStockCri()> pAct.getStockTotal())
+				resultado=true;
+		}
+		return resultado;
+	}
+
 }

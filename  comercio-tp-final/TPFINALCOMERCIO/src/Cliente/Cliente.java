@@ -114,19 +114,22 @@ public class Cliente implements Observer{
 	}
 	
 	/**
-	 * Agrega una compra a la lista de compras del cliente.
-	 * @param venta 
+	 * Agrega una venta a la lista de compras del cliente.
+	 * @param venta este parametro refiere a la venta a agregar a la lista de compras del cliente.
 	 */
 	public void addCompra(Venta venta){
 		this.compras.add(venta);
 	}
-
 
 	public void update(Observable o, Object arg) {
 	    String nombreOferta = (String)arg;
 	    this.getEstadoS().enviarMail(nombreOferta, this);
 	}
 	
+	/**
+	 * Simula el envio de un mail al cliente.
+	 * @param nombreDeOferta este parametro refiere al nombre de la oferta que se le enviara por mail al cliente.
+	 */
 	public void enviarMail(String nombreDeOferta){
 		System.out.println(nombreDeOferta);
 	}

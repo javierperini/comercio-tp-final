@@ -31,14 +31,14 @@ public class Cambio extends Movimiento {
 		}
 		return monto;
 	}
-	//TESTEAR
+	
 	/**
 	 *Retorna true si el monto de la lista que quiere a cambio el cliente supera el monto de la lista que quiere cambiar.
 	 */
 	public boolean elMontoDeLosProductosSolicitadosExcedeAlDeLosDevueltos(){
 		return (this.calcularImporte()<this.calcularImporteDeLaListaNueva());
 	}
-	//TESTEAR
+	
 	/**
 	 *Modifica el Stock.
 	 */

@@ -36,8 +36,10 @@ public class VentaConCuentaCorriente extends Venta{
 	 */
 	@Override
 	public void agregarVentaAlCliente() throws SinCuentaCorrienteException{
-			this.getCliente().addCompra(this);
-			this.getCliente().getCuentaCorriente().addCompra(this);
+		if(! this.comercio.estaRegistrado(this.getCliente()))
+			this.comercio.agregarCliente(this.getCliente());
+		this.getCliente().addCompra(this);
+		this.getCliente().getCuentaCorriente().addCompra(this);
 	}
 }
 

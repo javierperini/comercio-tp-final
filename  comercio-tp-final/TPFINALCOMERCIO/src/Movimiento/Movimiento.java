@@ -26,7 +26,7 @@ public abstract class Movimiento {
 			this.comercio=comercio;
 			this.montoTotal= 0d;
 		}
-        //TESTEAR
+        
 	 	/**
 		 *-Calcula el importe de la lista de ordenes de compra, osea la suma de: cada producto por su cantidad.
 		 */
@@ -64,6 +64,9 @@ public abstract class Movimiento {
 		 */
 		public DateTime getFecha(){
 			return fecha;
+		}
+		public double getMontoTotal(){
+			return this.montoTotal;
 		}
 		
 }

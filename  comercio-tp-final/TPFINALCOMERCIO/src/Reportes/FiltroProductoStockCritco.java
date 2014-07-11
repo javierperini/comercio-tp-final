@@ -7,7 +7,10 @@ import Comercio.Comercio;
 import Producto.Producto;
 
 public class FiltroProductoStockCritco<E> extends Filtro<Producto> {
-
+	
+	/**
+	 * Devuelve los productos que tiene presentaciones  que superan el stock critico
+	 */
 	@Override
 	protected List<Producto> filtrar(Comercio comercio) {
 		List<Producto> resultado= new ArrayList<Producto>();

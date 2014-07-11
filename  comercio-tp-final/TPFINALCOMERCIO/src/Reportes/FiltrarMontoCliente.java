@@ -11,6 +11,9 @@ import Comercio.Comercio;
 
 public class FiltrarMontoCliente<T> extends Filtro<Double> {
 
+	/**
+	 * Devuelve los gastos de los clientes
+	 */
 	@Override
 	 protected List<Double> filtrar(Comercio comercio) {
 		List<Double>resultado= new ArrayList<Double>();

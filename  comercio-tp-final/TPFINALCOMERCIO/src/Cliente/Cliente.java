@@ -25,6 +25,10 @@ public class Cliente implements Observer{
 	private CuentaCorriente cuentaCorriente;
 	private OrdenDeCompra ordenPedida;
 	
+	/**
+	 * CONSTRUCTOR
+	 * @param nombre este parametro refiere al nombre del cliente
+	 */
 	public Cliente(String nombre){
 		this.compras = new ArrayList<Venta>();
 		this.nombre=nombre;
@@ -32,42 +36,87 @@ public class Cliente implements Observer{
 		this.cuentaCorriente = new CuentaCorriente();
 	}
 	
+	/**
+	 *
+	 * @return Retorna las compras realizadas por el cliente.
+	 */
 	public List<Venta> getCompras() {
 		return this.compras;
 	}
 	
+	/**
+	 * 
+	 * @return retorna el nombre del cliente.
+	 */
 	public String getNombre() {
 		return this.nombre;
 	}
 	 
+	/**
+	 * 
+	 * @return retorna el estado suscripto del cliente. 
+	 */
 	public EstadoSuscripto getEstadoS() {
 		return this.estadoS;
 	}
 	
+	/**
+	 * Setea el estado suscripto del cliente
+	 * @param estadoS este parametro refiere al estado suscripto a setear del cliente.
+	 */
 	public void setEstadoS(EstadoSuscripto estadoS) {
 		this.estadoS = estadoS;
 	}
 
+	/**
+	 * 
+	 * @return retorna la cuenta corriente del cliente.
+	 */
 	public CuentaCorriente getCuentaCorriente() {
 		return this.cuentaCorriente;
 	}
 	
+	/**
+	 * Setea la cuenta corriente del cliente
+	 * @param cuentaCorriente este parametro refiere a la cuenta corriente del cliente.
+	 */
 	public void setCuentaCorriente(CuentaCorriente cuentaCorriente) {
 		this.cuentaCorriente = cuentaCorriente;
 	}
 
+	/**
+	 * Deposita dinero en la cuenta corriente del cliente.
+	 * @param dinero este parametro refiere al dinero a depositar en la cuenta corriente del cliente.
+	 */
 	public void depositar(double dinero){
 		this.getCuentaCorriente().aumentarSaldo(dinero);		
 	}
 	
+	/**
+	 * 
+	 * @return retorna el saldo que tiene en la cuenta corriente el cliente.
+	 * @throws SinCuentaCorrienteException si el cliente no tiene cuenta corriente activa larga esta excepcion.
+	 */
 	public double getSaldo() throws SinCuentaCorrienteException {
 		return this.getCuentaCorriente().saldo();
 	}
 	
+	/**
+	 * Descuenta saldo de la cuenta corriente del cliente
+	 * @param unSaldo este parametro refiere al saldo a descontar de la cuenta corriente del cliente.
+	 * @throws SinCuentaCorrienteException si el cliente no tiene una cuenta corriente no se le puede 
+	 * descontar ningun saldo y salta esta excepcion.
+	 * @throws SaldoInsuficienteException si el cliente no tiene saldo suficiente para descontar de la cuenta corriente
+	 * se larga esta excepcion. 
+	 */
 	public void descontarSaldo(double unSaldo) throws SinCuentaCorrienteException, SaldoInsuficienteException{
 		this.getCuentaCorriente().descontarSaldo(unSaldo);
 	}
 	
+	/**
+	 * Agrega una compra a la lista de compras del cliente.
+	 * @param venta 
+	 */
 	public void addCompra(Venta venta){
 		this.compras.add(venta);
 	}

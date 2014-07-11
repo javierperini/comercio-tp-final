@@ -150,6 +150,4 @@ public class ComercioTestCase {
 		assertTrue(this.comercio.estaEnOferta(this.producto, this.fechaIntermedia));
 		assertEquals(10.56d,this.comercio.getPrecioOfertaDe(this.producto),0);
 	}
-
-
 }

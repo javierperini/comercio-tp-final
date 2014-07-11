@@ -8,7 +8,7 @@ import Comercio.OrdenDeCompra;
 import Producto.Producto;
 import Venta.Venta;
 
-public class FiltroPorProducto<T> extends Filtro<Venta> {
+public class FiltroPorProducto<E> extends Filtro<Venta> {
 	private Producto producto;
 
 	public FiltroPorProducto(Producto producto){

@@ -6,7 +6,7 @@ import java.util.List;
 import Comercio.Comercio;
 import Venta.Venta;
 
-public class FiltrarVentaPorMonto<T> extends Filtro<Venta> {
+public class FiltrarVentaPorMonto<E> extends Filtro<Venta> {
 	private double min;
 	private double max;
 

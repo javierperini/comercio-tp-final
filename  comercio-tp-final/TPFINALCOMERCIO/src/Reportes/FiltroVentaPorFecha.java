@@ -8,7 +8,7 @@ import org.joda.time.DateTime;
 import Comercio.Comercio;
 import Venta.Venta;
 
-public class FiltroVentaPorFecha<T> extends Filtro<Venta> {
+public class FiltroVentaPorFecha<E> extends Filtro<Venta> {
 	private DateTime fechaMin;
 	private DateTime fechaMax;
 	

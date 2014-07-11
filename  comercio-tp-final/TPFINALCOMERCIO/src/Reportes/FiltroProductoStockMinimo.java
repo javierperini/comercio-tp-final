@@ -7,7 +7,7 @@ import Comercio.Comercio;
 import Producto.Producto;
 import Producto.Unidad;
 
-public class FiltroProductoStockMinimo<T> extends Filtro<Producto> {
+public class FiltroProductoStockMinimo<E> extends Filtro<Producto> {
 	
 
 

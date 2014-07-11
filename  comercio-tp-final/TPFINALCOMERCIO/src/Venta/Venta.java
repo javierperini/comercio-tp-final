@@ -35,6 +35,8 @@ public abstract class Venta extends Movimiento{
 	
 	/**
 	 *Registra la venta en la lista de compras hechas del cliente.
+	 * @throws SinCuentaCorrienteException En el caso de que se genere una venta con cuenta corriente, 
+	 * si el cliente no tiene una cuenta corriente se cancela la venta y salta esta excepcion. 
 	 */
 	public void agregarVentaAlCliente() throws SinCuentaCorrienteException{
 		this.getCliente().addCompra(this);

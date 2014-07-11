@@ -14,7 +14,10 @@ public class FiltrarMontoClientePorFecha<T> extends Filtro<Double> {
 	public FiltrarMontoClientePorFecha(DateTime fecha){
 		this.fecha=fecha;
 	}
-
+	
+	/**
+	 * Devuelve los gasto un cliente en cierta fecha
+	 */
 	@Override
 	 protected List<Double> filtrar(Comercio comercio) {
 		List<Double>resultado= new ArrayList<Double>();
@@ -25,7 +28,12 @@ public class FiltrarMontoClientePorFecha<T> extends Filtro<Double> {
 		
 		return resultado;
 	}
-
+	
+	/**
+	 * 
+	 * @param cliente  a buscar
+	 * @return retorna los gastos del cliente en una fecha determinada
+	 */
 	private Double gastoDeCompras(Cliente cliente) {
 		Double contador= 0d;
 		for(Venta vAct:cliente.getCompras()){

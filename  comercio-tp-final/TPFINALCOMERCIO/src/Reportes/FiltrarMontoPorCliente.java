@@ -14,7 +14,9 @@ public class FiltrarMontoPorCliente<T> extends Filtro<Double> {
 		this.cliente=cliente;
 		
 	}
-
+	/**
+	 * Devuelve los gastos de los clientes
+	 */
 	@Override
 	 protected List<Double> filtrar(Comercio comercio) {
 		List<Double>resultado= new ArrayList<Double>();
@@ -25,7 +27,11 @@ public class FiltrarMontoPorCliente<T> extends Filtro<Double> {
 		
 		return resultado;
 	}
-
+	/**
+	 *  
+	 * @param cliente a buscar
+	 * @return devuelve lo que gasto ese cliente
+	 */
 	private Double gastoDeCompras(Cliente cliente) {
 		Double contador= 0d;
 		for(Venta vAct:cliente.getCompras()){

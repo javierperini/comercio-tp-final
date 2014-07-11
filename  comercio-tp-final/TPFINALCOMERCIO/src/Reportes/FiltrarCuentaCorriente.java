@@ -9,6 +9,9 @@ import Venta.Venta;
 
 public class FiltrarCuentaCorriente<T> extends Filtro<Venta>{
 
+	/**
+	 * Devuelve las ventas hechas atravez de una cuenta corriente de los clientes
+	 */
 	@Override
 	protected List<Venta> filtrar(Comercio comercio) {
 		List<Venta>resultado= new ArrayList<Venta>();

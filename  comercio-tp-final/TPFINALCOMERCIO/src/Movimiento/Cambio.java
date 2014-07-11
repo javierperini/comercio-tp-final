@@ -9,9 +9,6 @@ import Comercio.Comercio;
 import Comercio.OrdenDeCompra;
 import Excepciones.NoTengoStock;
 
-
-
-
 public class Cambio extends Movimiento {
 	
 	protected List<OrdenDeCompra> listaDeProductosNueva;

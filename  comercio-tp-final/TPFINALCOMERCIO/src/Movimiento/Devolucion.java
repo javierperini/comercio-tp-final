@@ -10,10 +10,15 @@ import Comercio.Comercio;
 import Comercio.OrdenDeCompra;
 
 public class Devolucion extends Movimiento {
-	
 
 	private List<OrdenDeCompra>ordenes = new ArrayList<OrdenDeCompra>();
-	
+	/**
+	 * CONSTRUCTOR
+	 * @param unCliente 
+	 * @param listadoDeProductos
+	 * @param fecha
+	 * @param comercio
+	 */
 	public Devolucion(Cliente unCliente, List<OrdenDeCompra> listadoDeProductos,DateTime fecha,Comercio comercio){		
 		super(unCliente,listadoDeProductos,fecha,comercio);
 	}

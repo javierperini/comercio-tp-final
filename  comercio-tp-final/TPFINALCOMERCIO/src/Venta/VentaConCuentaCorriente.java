@@ -18,7 +18,7 @@ public class VentaConCuentaCorriente extends Venta{
 	 * @param fecha este parametro refiere a la fecha de creacion de la venta.
 	 * @param comercio este parametro refiere al comercio donde se genero dicha venta.
 	 */
-	public VentaConCuentaCorriente(Cliente unCliente,List<OrdenDeCompra> listadoDeProductos,DateTime fecha,Comercio comercio) {
+	public VentaConCuentaCorriente(Cliente unCliente,List<OrdenDeCompra> listadoDeProductos,DateTime fecha,Comercio comercio){
 		super(unCliente, listadoDeProductos, fecha, comercio);
 	}
 	/**
@@ -35,10 +35,9 @@ public class VentaConCuentaCorriente extends Venta{
 	 * @throws SinCuentaCorrienteException Esta excepcion salta si el cliente no tiene una cuenta corriente.
 	 */
 	@Override
-	public void agregarVentaAlCliente() throws SinCuentaCorrienteException{
+	public void registrarClienteSiNoEsta() throws SinCuentaCorrienteException{
 		if(! this.comercio.estaRegistrado(this.getCliente()))
 			this.comercio.agregarCliente(this.getCliente());
-		this.getCliente().addCompra(this);
 		this.getCliente().getCuentaCorriente().addCompra(this);
 	}
 }

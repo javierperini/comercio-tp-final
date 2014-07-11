@@ -20,17 +20,18 @@ public class VentaConEntrega extends Venta{
 	/**
 	 *CONSTRUCTOR
 	 */
-	public VentaConEntrega(Cliente unCliente, List<OrdenDeCompra> listadoDeProductos, DateTime unaFecha, Comercio unComercio) {
+	public VentaConEntrega(Cliente unCliente, List<OrdenDeCompra> listadoDeProductos, DateTime unaFecha, Comercio unComercio){
 		super(unCliente, listadoDeProductos,unaFecha,unComercio);
 		
 	}
 	
 	/**
-	 *Instancia un envio, que correspondera a la venta.
+	 *Instancia un envio, que correspondera a la venta, y lo envia.
      * @param unaFechaDeSalida la fecha de salida asignada al envio.
 	 */
 	public void enviar(DateTime unaFechaDeSalida) {
 		envio=new Envio(cliente, this.calcularImporte(), unaFechaDeSalida, comercio);
+		envio.enviar();
 	}
 	
 	/**
@@ -38,6 +39,10 @@ public class VentaConEntrega extends Venta{
 	 */
 	public Envio getEnvio() {
 		return envio;
+	}
+
+	public void cobrarContrareembolso() {
+		this.envio.cobrarContrareembolso();
 	}
 
 

@@ -14,7 +14,7 @@ public class VentaDirecta extends Venta{
 	/**
 	 *CONSTRUCTOR
 	 */
-	public VentaDirecta(Cliente unCliente, List<OrdenDeCompra> listadoDeProductos, DateTime unaFecha,Comercio comercio) {
+	public VentaDirecta(Cliente unCliente, List<OrdenDeCompra> listadoDeProductos, DateTime unaFecha,Comercio comercio){
 		super(unCliente, listadoDeProductos,unaFecha,comercio);
 	}	
 }

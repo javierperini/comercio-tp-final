@@ -176,7 +176,7 @@ public class ReportesTest {
 	 }
 	
 	@Test
-	public void filtrarEnviosPendientes(){
+	public void filtrarEnviosPendientes() throws SinCuentaCorrienteException{
 		this.comercio.generarVentaConEntrega(this.cliente, this.listaOrden, this.fecha1);
 		this.comercio.generarVentaConEntrega(this.cliente, this.listaOrden, this.fecha2);
 		FiltroEnvioPendiente filtro= new FiltroEnvioPendiente();

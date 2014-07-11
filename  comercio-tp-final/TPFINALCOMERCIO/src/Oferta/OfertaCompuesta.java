@@ -10,6 +10,7 @@ import Producto.Producto;
 public class OfertaCompuesta extends Oferta{
 
 	private List<Oferta> ofertas;
+	
 	/**
 	 * CONSTRUCTOR
 	 * @param nombre este parametro refiere al nombre de la oferta.

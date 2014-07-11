@@ -134,7 +134,7 @@ public class Cliente implements Observer{
 		System.out.println(nombreDeOferta);
 	}
 	
-	//TESTEAR de la extencion
+	//TESTEAR de la extencion   SACAR O NO SACAR?
 	public void pedido(Producto producto, Unidad unidad, double cantidad,Comercio comercio){
 		comercio.agregarAListaPedidos(this);
 		DateTime today=new DateTime(2014, 10, 06, 00, 00);

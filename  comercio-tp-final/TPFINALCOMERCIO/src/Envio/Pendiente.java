@@ -1,7 +1,6 @@
 package Envio;
-public class Pendiente extends EstadoDeEnvio {
 
-	
+public class Pendiente extends EstadoDeEnvio {
 	/**
 	 *Cambia el estado del envio a EnProceso.
      * @param unEnvio

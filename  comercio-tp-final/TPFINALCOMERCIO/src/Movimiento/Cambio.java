@@ -72,7 +72,9 @@ public class Cambio extends Movimiento {
 	
 	/**Si el cliente tiene saldo a favor se lo carga en su cuenta corriente**/
 	public void cargarDiferenciaEnCuentaCorriente(){
-		this.cliente.depositar(this.calcularImporte() - this.calcularImporteDeLaListaNueva());
+		double diferencia = this.calcularImporte() - this.calcularImporteDeLaListaNueva();
+		if(diferencia > 0)
+			this.cliente.depositar(diferencia);
 	}
 	
 }

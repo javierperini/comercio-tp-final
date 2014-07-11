@@ -2,6 +2,7 @@ package Envio;
 
 import org.joda.time.DateTime;
 
+import Clases.Pendiente;
 import Cliente.Cliente;
 import Comercio.Comercio;
 
@@ -24,6 +25,7 @@ public class Envio {
 		this.estadoDeEnvio = new Pendiente();
 		this.fechaDeSalida = unaFecha;
 		this.comercio = unComercio;
+		this.comercio.agregarEnvioAListaDePendientes(this);
 	}
 	
 	
@@ -31,6 +33,7 @@ public class Envio {
 	 *Salida del envio.
 	 */
 	public void enviar(){
+		this.comercio.quitarEnvioAListaDePendientes(this);
 		this.estadoDeEnvio.enviar(this);
 	}
 	
@@ -42,10 +45,11 @@ public class Envio {
 	}
 	
 	/**
-	 *Reprograma la fecha.
+	 *Reprograma la fecha de salida.
 	 */
 	public void reprogramarFechaDeSalida(DateTime unaFecha){
-		this.estadoDeEnvio.reprogramarFechaDeSalida(this, unaFecha);		
+		this.estadoDeEnvio.reprogramarFechaDeSalida(this, unaFecha);	
+		this.comercio.agregarEnvioAListaDePendientes(this);
 	}
 	
 	/**

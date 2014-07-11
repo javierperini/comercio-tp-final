@@ -11,7 +11,7 @@ import Comercio.OrdenDeCompra;
 
 public class Devolucion extends Movimiento {
 
-	private List<OrdenDeCompra>ordenes = new ArrayList<OrdenDeCompra>();
+	
 	/**
 	 * CONSTRUCTOR
 	 * @param unCliente 

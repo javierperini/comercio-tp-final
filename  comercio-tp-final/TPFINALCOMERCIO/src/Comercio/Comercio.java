@@ -33,6 +33,7 @@ public class Comercio extends Observable {
 	private List<Devolucion> devoluciones;
 	private List <Cambio>cambios;
 	private List<Envio> enviosPendientes;
+	private List<Cliente> clientesRegistrados;
 	
 	
 	public Comercio(String nombre, List<Producto> productos) {
@@ -47,6 +48,7 @@ public class Comercio extends Observable {
 		this.ofertas=new ArrayList<Oferta>();
 		this.clientePedidos= new ArrayList<Cliente>();
 		this.enviosPendientes=new ArrayList<Envio>();
+		this.clientesRegistrados= new ArrayList<Cliente>();
 		
 	}
 	
@@ -371,5 +373,22 @@ public class Comercio extends Observable {
 	 */
 	public int cantClientePedidos (){
 		return this.clientePedidos.size();
+	}
+
+	public void agregarCliente(Cliente cliente) {
+		this.clientesRegistrados.add(cliente);
+		
+	}
+	public List<Cliente> getCliente(){
+		return this.clientesRegistrados;
+	}
+
+	public boolean estaRegistrado(Cliente cliente) {
+		 boolean resultado= false;
+		 for(Cliente cAct:this.clientesRegistrados){
+			 if(cAct.equals(cliente))
+				 resultado=true;
+		 }
+		return resultado;
 	}
 }

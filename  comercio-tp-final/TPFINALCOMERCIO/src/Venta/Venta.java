@@ -39,6 +39,8 @@ public class Venta extends Movimiento{
 	 * si el cliente no tiene una cuenta corriente se cancela la venta y salta esta excepcion. 
 	 */
 	public void agregarVentaAlCliente() throws SinCuentaCorrienteException{
+		if(! this.comercio.estaRegistrado(this.getCliente()))
+			this.comercio.agregarCliente(this.getCliente());
 		this.getCliente().addCompra(this);
 	}
 	

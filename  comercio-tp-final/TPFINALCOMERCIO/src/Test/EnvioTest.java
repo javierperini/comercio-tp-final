@@ -55,7 +55,7 @@ public class EnvioTest {
 		this.envio.elClienteNoSeEncuentra();
 		this.envio.reprogramarFechaDeSalida(new DateTime(2014, 10, 7, 00, 00));
 		assertTrue(this.envio.getEstadoDeEnvio().getClass().equals(Pendiente.class));
-		//verify(this.comercioMock,times(1)).agregarEnvioAListaDePendientes(envio);
+		
 	}
 	
 	@Test

@@ -70,13 +70,13 @@ public class VentaConCuentaCorrienteTest {
 	
 	@Test
 	public void testAgregarVentaAlCliente() throws SinCuentaCorrienteException{
-		this.ventaMock.agregarVentaAlCliente();
+		this.ventaMock.registrarClienteSiNoEsta();
 	   verify(this.unClienteMock, atLeastOnce()).addCompra(ventaMock);
     }
 	
 	@Test(expected=SinCuentaCorrienteException.class)
     public void testAgregarVentaAlClienteSinCuentaCorriente() throws SinCuentaCorrienteException{
-		this.venta.agregarVentaAlCliente();
+		this.venta.registrarClienteSiNoEsta();
     }
 
 }

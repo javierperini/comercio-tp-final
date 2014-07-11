@@ -99,7 +99,7 @@ public class Comercio extends Observable {
      * @param cantidad
      */
    public void notificarClientes(Producto producto, Unidad unidad,double cantidad,DateTime fecha) {
-		OrdenDeCompra pedida=  new OrdenDeCompra(producto,unidad,cantidad,fecha);
+	   OrdenDeCompra pedida=  new OrdenDeCompra(producto,unidad,cantidad,fecha);
 		//pedida: orden de compra que trata de satisfacer la necesidad del cliente.
 		for(Cliente cliente: this.clientePedidos){
 			 cliente.avisoDePedido(pedida);
@@ -146,14 +146,14 @@ public class Comercio extends Observable {
 	 */
 	public void generarVentaDirecta(Cliente cliente,List<OrdenDeCompra> ordenCompras, DateTime fecha) throws SinCuentaCorrienteException {
 		VentaDirecta ventaD=new VentaDirecta(cliente,ordenCompras,fecha,this);
-		registrarVenta(ventaD);
+		this.registrarVenta(ventaD);
 	}
 	
 	private void registrarVenta(Venta ventaD) throws SinCuentaCorrienteException {
 		this.ventas.add(ventaD);
 		ventaD.modificarStock();
+		ventaD.registrarClienteSiNoEsta();
 		double gastado=ventaD.calcularImporte();
-		ventaD.agregarVentaAlCliente();
 		this.incrementarMonto(gastado);
 	}
 	
@@ -163,14 +163,15 @@ public class Comercio extends Observable {
 	 * @param cliente
 	 * @param ordenCompras
 	 * @param fecha
+	 * @throws SinCuentaCorrienteException 
 	 */
-	public void generarVentaConEntrega(Cliente cliente, List<OrdenDeCompra> ordenCompras, DateTime fecha) {
+	public void generarVentaConEntrega(Cliente cliente, List<OrdenDeCompra> ordenCompras, DateTime fecha) throws SinCuentaCorrienteException {
 		VentaConEntrega ventaE=new VentaConEntrega(cliente,ordenCompras,fecha,this);
 		this.ventas.add(ventaE);
 		ventaE.modificarStock();
+		ventaE.registrarClienteSiNoEsta();
 		ventaE.enviar(fecha);
-		ventaE.getEnvio().enviar();
-		ventaE.getEnvio().cobrarContrareembolso();
+		ventaE.cobrarContrareembolso();
 	}
 	
 	/**
@@ -405,4 +406,5 @@ public class Comercio extends Observable {
 		 }
 		return resultado;
 	}
+
 }

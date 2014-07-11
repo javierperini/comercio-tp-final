@@ -27,12 +27,13 @@ public abstract class Movimiento {
 			this.montoTotal= 0d;
 		}
         
+	 	
 	 	/**
 		 *-Calcula el importe de la lista de ordenes de compra, osea la suma de: cada producto por su cantidad.
 		 */
 	 	public double calcularImporte(){
-			double monto= 0d;
-			for (OrdenDeCompra orden : this.listadoDeProductos) {
+	 		double monto= 0d;
+	 		for (OrdenDeCompra orden : this.listadoDeProductos) {
 				if(this.comercio.estaEnOferta(orden.getUnProducto(),this.fecha)){
 					monto+=comercio.getPrecioOfertaDe(orden.getUnProducto());
 				}else{

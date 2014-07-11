@@ -16,10 +16,12 @@ public class Venta extends Movimiento{
 	/**
 	 *CONSTRUCTOR
 	 */
-	public Venta(Cliente unCliente, List<OrdenDeCompra> listadoDeProductos,DateTime fecha,Comercio comercio) {
+	public Venta(Cliente unCliente, List<OrdenDeCompra> listadoDeProductos,DateTime fecha,Comercio comercio){
 		super(unCliente, listadoDeProductos,fecha,comercio);
+		unCliente.addCompra(this);
 	}
 	
+
 	/**
 	 *Decrementa el stock de los productos que estan en la lista dada por el cliente.
 	 */
@@ -38,10 +40,11 @@ public class Venta extends Movimiento{
 	 * @throws SinCuentaCorrienteException En el caso de que se genere una venta con cuenta corriente, 
 	 * si el cliente no tiene una cuenta corriente se cancela la venta y salta esta excepcion. 
 	 */
-	public void agregarVentaAlCliente() throws SinCuentaCorrienteException{
+
+	public void registrarClienteSiNoEsta()throws SinCuentaCorrienteException {
 		if(! this.comercio.estaRegistrado(this.getCliente()))
 			this.comercio.agregarCliente(this.getCliente());
-		this.getCliente().addCompra(this);
+		
 	}
 	
 	/**

@@ -117,7 +117,7 @@ public class ComercioTestCase {
 		
 	}
 	@Test
-	public void testGenerarVentaConEntrega(){
+	public void testGenerarVentaConEntrega() throws SinCuentaCorrienteException{
 		this.comercio.generarVentaConEntrega(this.clienteMock,this.ordenCompras,this.fechaInicio);
 		assertEquals(12d,this.comercio.getMontoRecaudado(),0d);
 		assertEquals(1d,this.comercio.getVentas().size(),0d);

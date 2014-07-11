@@ -13,7 +13,6 @@ public class Producto {
 	private List<Presentacion> ListPresentacion;
 	
 	public Producto(String nombre, String marca, String descripcion,String tipo, List<Presentacion> listPrese) {
-		//(nombre,marca,descripcion,tipo,List<presentacion>)
 		this.nombre=nombre;
 		this.marca= marca;
 		this.descripcion=descripcion;

@@ -134,13 +134,11 @@ public class Cliente implements Observer{
 		System.out.println(nombreDeOferta);
 	}
 	
-	//TESTEAR de la extencion   SACAR O NO SACAR?
-	public void pedido(Producto producto, Unidad unidad, double cantidad,Comercio comercio){
-		comercio.agregarAListaPedidos(this);
-		DateTime today=new DateTime(2014, 10, 06, 00, 00);
-		this.ordenPedida= new OrdenDeCompra(producto,unidad,cantidad,today);
-	}
-	//TESTEAR de la extencion
+
+	/**
+	 *  Simula el aviso del comercio al cliente cuando sus productos se encuentran en stock
+	 * @param pedida
+	 */
 	public void avisoDePedido(OrdenDeCompra pedida) {
 	   if(this.ordenPedida.getCantidad()==pedida.getCantidad() && 
 			   this.ordenPedida.getUnProducto().equals(pedida.getUnProducto()) && 

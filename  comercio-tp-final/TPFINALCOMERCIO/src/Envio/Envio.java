@@ -2,7 +2,7 @@ package Envio;
 
 import org.joda.time.DateTime;
 
-import Clases.Pendiente;
+import EstadoDeEnvio.Pendiente;
 import Cliente.Cliente;
 import Comercio.Comercio;
 

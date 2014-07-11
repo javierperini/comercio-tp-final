@@ -3,9 +3,11 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
-	<classpathentry kind="lib" path="C:/Users/Javier/Desktop/Facultad/hamcrest-core-1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Javier/Desktop/Facultad/junit.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Javier/Desktop/Facultad/Objetos 2/mockito/mockito-all-1.9.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Javier/Desktop/Facultad/joda-time-2.3/joda-time-2.3.jar"/>
+	<classpathentry kind="lib" path="/home/gian/Descargas/mockito/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="/home/gian/Descargas/mockito/junit.jar"/>
+	<classpathentry kind="lib" path="/home/gian/Descargas/mockito/mockito/mockito-all-1.9.5.jar"/>
+	<classpathentry kind="lib" path="/home/gian/Descargas/mockito/joda-time-2.3/joda-time-2.3.jar"/>
+	<classpathentry kind="lib" path="/home/gian/Descargas/mockito/joda-time-2.3/joda-time-2.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="/home/gian/Descargas/mockito/joda-time-2.3/joda-time-2.3-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

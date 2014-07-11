@@ -5,9 +5,6 @@ import org.joda.time.DateTime;
 import Cliente.Cliente;
 import Comercio.Comercio;
 
-
-
-
 public abstract class EstadoDeEnvio {
 	
 	/**
